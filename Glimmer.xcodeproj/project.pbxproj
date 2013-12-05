@@ -7,6 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		022955F04F7949A0BEFD2CD1 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C51D45C4CA544143A9917164 /* libPods.a */; };
+		436414C4184DF72B003EB5C1 /* Char-Catch.aifc in Resources */ = {isa = PBXBuildFile; fileRef = 436414C3184DF72B003EB5C1 /* Char-Catch.aifc */; };
+		436414C9184DF833003EB5C1 /* Char-Catch.aifc in Resources */ = {isa = PBXBuildFile; fileRef = 436414C5184DF833003EB5C1 /* Char-Catch.aifc */; };
+		436414CA184DF833003EB5C1 /* Char-Miss.aifc in Resources */ = {isa = PBXBuildFile; fileRef = 436414C6184DF833003EB5C1 /* Char-Miss.aifc */; };
+		436414CB184DF833003EB5C1 /* Music-Level.aifc in Resources */ = {isa = PBXBuildFile; fileRef = 436414C7184DF833003EB5C1 /* Music-Level.aifc */; };
+		436414CC184DF833003EB5C1 /* Music-Win.aifc in Resources */ = {isa = PBXBuildFile; fileRef = 436414C8184DF833003EB5C1 /* Music-Win.aifc */; };
+		43663DC71844A85900C856AC /* SpriteBundle.atlasc in Resources */ = {isa = PBXBuildFile; fileRef = 43663DC51844A85900C856AC /* SpriteBundle.atlasc */; };
+		4384A2451844AC9B00287EAA /* ChildSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 4384A2441844AC9B00287EAA /* ChildSprite.m */; };
+		4384A24E1844B1CB00287EAA /* Dosis-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4384A2471844B1CB00287EAA /* Dosis-Bold.ttf */; };
+		4384A24F1844B1CB00287EAA /* Dosis-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4384A2481844B1CB00287EAA /* Dosis-ExtraBold.ttf */; };
+		4384A2501844B1CB00287EAA /* Dosis-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4384A2491844B1CB00287EAA /* Dosis-ExtraLight.ttf */; };
+		4384A2511844B1CB00287EAA /* Dosis-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4384A24A1844B1CB00287EAA /* Dosis-Light.ttf */; };
+		4384A2521844B1CB00287EAA /* Dosis-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4384A24B1844B1CB00287EAA /* Dosis-Medium.ttf */; };
+		4384A2531844B1CB00287EAA /* Dosis-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4384A24C1844B1CB00287EAA /* Dosis-Regular.ttf */; };
+		4384A2541844B1CB00287EAA /* Dosis-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4384A24D1844B1CB00287EAA /* Dosis-SemiBold.ttf */; };
+		4384A2571844B8B100287EAA /* GameOverScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 4384A2561844B8B100287EAA /* GameOverScene.m */; };
 		43A01BA81843D9F400E31A5E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43A01BA71843D9F400E31A5E /* Foundation.framework */; };
 		43A01BAA1843D9F400E31A5E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43A01BA91843D9F400E31A5E /* CoreGraphics.framework */; };
 		43A01BAC1843D9F400E31A5E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43A01BAB1843D9F400E31A5E /* UIKit.framework */; };
@@ -18,13 +34,21 @@
 		43A01BC01843D9F400E31A5E /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43A01BBE1843D9F400E31A5E /* Main_iPad.storyboard */; };
 		43A01BC31843D9F400E31A5E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A01BC21843D9F400E31A5E /* ViewController.m */; };
 		43A01BC61843D9F400E31A5E /* MyScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A01BC51843D9F400E31A5E /* MyScene.m */; };
-		43A01BC81843D9F400E31A5E /* Spaceship.png in Resources */ = {isa = PBXBuildFile; fileRef = 43A01BC71843D9F400E31A5E /* Spaceship.png */; };
 		43A01BCA1843D9F400E31A5E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43A01BC91843D9F400E31A5E /* Images.xcassets */; };
 		43A01BD11843D9F400E31A5E /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43A01BD01843D9F400E31A5E /* XCTest.framework */; };
 		43A01BD21843D9F400E31A5E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43A01BA71843D9F400E31A5E /* Foundation.framework */; };
 		43A01BD31843D9F400E31A5E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43A01BAB1843D9F400E31A5E /* UIKit.framework */; };
 		43A01BDB1843D9F400E31A5E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 43A01BD91843D9F400E31A5E /* InfoPlist.strings */; };
 		43A01BDD1843D9F400E31A5E /* GlimmerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A01BDC1843D9F400E31A5E /* GlimmerTests.m */; };
+		43A01BE81843DA3D00E31A5E /* GlimmerSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A01BE71843DA3D00E31A5E /* GlimmerSprite.m */; };
+		43A01C381843F55700E31A5E /* GlimmerGlow.sks in Resources */ = {isa = PBXBuildFile; fileRef = 43A01C361843F55700E31A5E /* GlimmerGlow.sks */; };
+		43A01C391843F55700E31A5E /* bokeh.png in Resources */ = {isa = PBXBuildFile; fileRef = 43A01C371843F55700E31A5E /* bokeh.png */; };
+		43A01C3C1843F6F400E31A5E /* MyParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 43A01C3A1843F6F400E31A5E /* MyParticle.sks */; };
+		43A01C3D1843F6F400E31A5E /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 43A01C3B1843F6F400E31A5E /* spark.png */; };
+		43A01C3F1843F7AB00E31A5E /* glimmerDeath.sks in Resources */ = {isa = PBXBuildFile; fileRef = 43A01C3E1843F7AB00E31A5E /* glimmerDeath.sks */; };
+		43AEA5F618478971004C15E1 /* gradient-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 43AEA5F518478971004C15E1 /* gradient-01.png */; };
+		43AEA5F818478A1B004C15E1 /* gradient-01-small.png in Resources */ = {isa = PBXBuildFile; fileRef = 43AEA5F718478A1A004C15E1 /* gradient-01-small.png */; };
+		43E3E40B1850B43C005607C6 /* IntroScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 43E3E40A1850B43C005607C6 /* IntroScene.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +62,24 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		436414C3184DF72B003EB5C1 /* Char-Catch.aifc */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Char-Catch.aifc"; sourceTree = "<group>"; };
+		436414C5184DF833003EB5C1 /* Char-Catch.aifc */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Char-Catch.aifc"; sourceTree = "<group>"; };
+		436414C6184DF833003EB5C1 /* Char-Miss.aifc */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Char-Miss.aifc"; sourceTree = "<group>"; };
+		436414C7184DF833003EB5C1 /* Music-Level.aifc */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Music-Level.aifc"; sourceTree = "<group>"; };
+		436414C8184DF833003EB5C1 /* Music-Win.aifc */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Music-Win.aifc"; sourceTree = "<group>"; };
+		43663DC51844A85900C856AC /* SpriteBundle.atlasc */ = {isa = PBXFileReference; lastKnownFileType = folder; path = SpriteBundle.atlasc; sourceTree = "<group>"; };
+		43663DC61844A85900C856AC /* sprites.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sprites.h; sourceTree = "<group>"; };
+		4384A2431844AC9B00287EAA /* ChildSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChildSprite.h; sourceTree = "<group>"; };
+		4384A2441844AC9B00287EAA /* ChildSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChildSprite.m; sourceTree = "<group>"; };
+		4384A2471844B1CB00287EAA /* Dosis-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-Bold.ttf"; sourceTree = "<group>"; };
+		4384A2481844B1CB00287EAA /* Dosis-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-ExtraBold.ttf"; sourceTree = "<group>"; };
+		4384A2491844B1CB00287EAA /* Dosis-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-ExtraLight.ttf"; sourceTree = "<group>"; };
+		4384A24A1844B1CB00287EAA /* Dosis-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-Light.ttf"; sourceTree = "<group>"; };
+		4384A24B1844B1CB00287EAA /* Dosis-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-Medium.ttf"; sourceTree = "<group>"; };
+		4384A24C1844B1CB00287EAA /* Dosis-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-Regular.ttf"; sourceTree = "<group>"; };
+		4384A24D1844B1CB00287EAA /* Dosis-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-SemiBold.ttf"; sourceTree = "<group>"; };
+		4384A2551844B8B100287EAA /* GameOverScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverScene.h; sourceTree = "<group>"; };
+		4384A2561844B8B100287EAA /* GameOverScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameOverScene.m; sourceTree = "<group>"; };
 		43A01BA41843D9F400E31A5E /* Glimmer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Glimmer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		43A01BA71843D9F400E31A5E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		43A01BA91843D9F400E31A5E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -55,13 +97,25 @@
 		43A01BC21843D9F400E31A5E /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		43A01BC41843D9F400E31A5E /* MyScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyScene.h; sourceTree = "<group>"; };
 		43A01BC51843D9F400E31A5E /* MyScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyScene.m; sourceTree = "<group>"; };
-		43A01BC71843D9F400E31A5E /* Spaceship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Spaceship.png; sourceTree = "<group>"; };
 		43A01BC91843D9F400E31A5E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		43A01BCF1843D9F400E31A5E /* GlimmerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GlimmerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		43A01BD01843D9F400E31A5E /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		43A01BD81843D9F400E31A5E /* GlimmerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GlimmerTests-Info.plist"; sourceTree = "<group>"; };
 		43A01BDA1843D9F400E31A5E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		43A01BDC1843D9F400E31A5E /* GlimmerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GlimmerTests.m; sourceTree = "<group>"; };
+		43A01BE61843DA3D00E31A5E /* GlimmerSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlimmerSprite.h; sourceTree = "<group>"; };
+		43A01BE71843DA3D00E31A5E /* GlimmerSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlimmerSprite.m; sourceTree = "<group>"; };
+		43A01C361843F55700E31A5E /* GlimmerGlow.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GlimmerGlow.sks; sourceTree = "<group>"; };
+		43A01C371843F55700E31A5E /* bokeh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bokeh.png; sourceTree = "<group>"; };
+		43A01C3A1843F6F400E31A5E /* MyParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MyParticle.sks; sourceTree = "<group>"; };
+		43A01C3B1843F6F400E31A5E /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
+		43A01C3E1843F7AB00E31A5E /* glimmerDeath.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = glimmerDeath.sks; sourceTree = "<group>"; };
+		43AEA5F518478971004C15E1 /* gradient-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gradient-01.png"; sourceTree = "<group>"; };
+		43AEA5F718478A1A004C15E1 /* gradient-01-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gradient-01-small.png"; sourceTree = "<group>"; };
+		43E3E4091850B43C005607C6 /* IntroScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroScene.h; sourceTree = "<group>"; };
+		43E3E40A1850B43C005607C6 /* IntroScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroScene.m; sourceTree = "<group>"; };
+		AFF6F365CD3946C7A2E8BFD8 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		C51D45C4CA544143A9917164 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +127,7 @@
 				43A01BAC1843D9F400E31A5E /* UIKit.framework in Frameworks */,
 				43A01BAE1843D9F400E31A5E /* SpriteKit.framework in Frameworks */,
 				43A01BA81843D9F400E31A5E /* Foundation.framework in Frameworks */,
+				022955F04F7949A0BEFD2CD1 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,6 +144,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		436414B0184D405A003EB5C1 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				436414C5184DF833003EB5C1 /* Char-Catch.aifc */,
+				436414C6184DF833003EB5C1 /* Char-Miss.aifc */,
+				436414C7184DF833003EB5C1 /* Music-Level.aifc */,
+				436414C8184DF833003EB5C1 /* Music-Win.aifc */,
+				436414C3184DF72B003EB5C1 /* Char-Catch.aifc */,
+			);
+			name = Audio;
+			sourceTree = "<group>";
+		};
+		4384A2461844B1CB00287EAA /* Dosis */ = {
+			isa = PBXGroup;
+			children = (
+				4384A2471844B1CB00287EAA /* Dosis-Bold.ttf */,
+				4384A2481844B1CB00287EAA /* Dosis-ExtraBold.ttf */,
+				4384A2491844B1CB00287EAA /* Dosis-ExtraLight.ttf */,
+				4384A24A1844B1CB00287EAA /* Dosis-Light.ttf */,
+				4384A24B1844B1CB00287EAA /* Dosis-Medium.ttf */,
+				4384A24C1844B1CB00287EAA /* Dosis-Regular.ttf */,
+				4384A24D1844B1CB00287EAA /* Dosis-SemiBold.ttf */,
+			);
+			path = Dosis;
+			sourceTree = "<group>";
+		};
 		43A01B9B1843D9F400E31A5E = {
 			isa = PBXGroup;
 			children = (
@@ -96,6 +177,7 @@
 				43A01BD61843D9F400E31A5E /* GlimmerTests */,
 				43A01BA61843D9F400E31A5E /* Frameworks */,
 				43A01BA51843D9F400E31A5E /* Products */,
+				AFF6F365CD3946C7A2E8BFD8 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -116,6 +198,7 @@
 				43A01BAB1843D9F400E31A5E /* UIKit.framework */,
 				43A01BAD1843D9F400E31A5E /* SpriteKit.framework */,
 				43A01BD01843D9F400E31A5E /* XCTest.framework */,
+				C51D45C4CA544143A9917164 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -123,15 +206,18 @@
 		43A01BAF1843D9F400E31A5E /* Glimmer */ = {
 			isa = PBXGroup;
 			children = (
+				43E3E4081850B41E005607C6 /* Scenes */,
+				43E3E4071850B40E005607C6 /* SpriteNodes */,
+				43E3E4061850B3ED005607C6 /* Particles */,
+				43E3E4051850B3D7005607C6 /* Images */,
+				436414B0184D405A003EB5C1 /* Audio */,
+				4384A2461844B1CB00287EAA /* Dosis */,
 				43A01BB81843D9F400E31A5E /* AppDelegate.h */,
 				43A01BB91843D9F400E31A5E /* AppDelegate.m */,
 				43A01BBB1843D9F400E31A5E /* Main_iPhone.storyboard */,
 				43A01BBE1843D9F400E31A5E /* Main_iPad.storyboard */,
 				43A01BC11843D9F400E31A5E /* ViewController.h */,
 				43A01BC21843D9F400E31A5E /* ViewController.m */,
-				43A01BC41843D9F400E31A5E /* MyScene.h */,
-				43A01BC51843D9F400E31A5E /* MyScene.m */,
-				43A01BC71843D9F400E31A5E /* Spaceship.png */,
 				43A01BC91843D9F400E31A5E /* Images.xcassets */,
 				43A01BB01843D9F400E31A5E /* Supporting Files */,
 			);
@@ -167,6 +253,53 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		43E3E4051850B3D7005607C6 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				43663DC61844A85900C856AC /* sprites.h */,
+				43AEA5F718478A1A004C15E1 /* gradient-01-small.png */,
+				43AEA5F518478971004C15E1 /* gradient-01.png */,
+				43663DC51844A85900C856AC /* SpriteBundle.atlasc */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		43E3E4061850B3ED005607C6 /* Particles */ = {
+			isa = PBXGroup;
+			children = (
+				43A01C361843F55700E31A5E /* GlimmerGlow.sks */,
+				43A01C3E1843F7AB00E31A5E /* glimmerDeath.sks */,
+				43A01C3A1843F6F400E31A5E /* MyParticle.sks */,
+				43A01C3B1843F6F400E31A5E /* spark.png */,
+				43A01C371843F55700E31A5E /* bokeh.png */,
+			);
+			name = Particles;
+			sourceTree = "<group>";
+		};
+		43E3E4071850B40E005607C6 /* SpriteNodes */ = {
+			isa = PBXGroup;
+			children = (
+				4384A2431844AC9B00287EAA /* ChildSprite.h */,
+				4384A2441844AC9B00287EAA /* ChildSprite.m */,
+				43A01BE61843DA3D00E31A5E /* GlimmerSprite.h */,
+				43A01BE71843DA3D00E31A5E /* GlimmerSprite.m */,
+			);
+			name = SpriteNodes;
+			sourceTree = "<group>";
+		};
+		43E3E4081850B41E005607C6 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				43A01BC41843D9F400E31A5E /* MyScene.h */,
+				43A01BC51843D9F400E31A5E /* MyScene.m */,
+				4384A2551844B8B100287EAA /* GameOverScene.h */,
+				4384A2561844B8B100287EAA /* GameOverScene.m */,
+				43E3E4091850B43C005607C6 /* IntroScene.h */,
+				43E3E40A1850B43C005607C6 /* IntroScene.m */,
+			);
+			name = Scenes;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -174,9 +307,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 43A01BE01843D9F400E31A5E /* Build configuration list for PBXNativeTarget "Glimmer" */;
 			buildPhases = (
+				D7976D647D1045C5971BB941 /* Check Pods Manifest.lock */,
 				43A01BA01843D9F400E31A5E /* Sources */,
 				43A01BA11843D9F400E31A5E /* Frameworks */,
 				43A01BA21843D9F400E31A5E /* Resources */,
+				02DAAC4832D9495DA9F9C942 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -243,11 +378,30 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				43A01BC81843D9F400E31A5E /* Spaceship.png in Resources */,
 				43A01BCA1843D9F400E31A5E /* Images.xcassets in Resources */,
+				43663DC71844A85900C856AC /* SpriteBundle.atlasc in Resources */,
+				43A01C381843F55700E31A5E /* GlimmerGlow.sks in Resources */,
+				4384A2501844B1CB00287EAA /* Dosis-ExtraLight.ttf in Resources */,
 				43A01BC01843D9F400E31A5E /* Main_iPad.storyboard in Resources */,
+				43AEA5F618478971004C15E1 /* gradient-01.png in Resources */,
+				43A01C3C1843F6F400E31A5E /* MyParticle.sks in Resources */,
+				43A01C3D1843F6F400E31A5E /* spark.png in Resources */,
+				436414CA184DF833003EB5C1 /* Char-Miss.aifc in Resources */,
+				4384A24E1844B1CB00287EAA /* Dosis-Bold.ttf in Resources */,
+				43A01C3F1843F7AB00E31A5E /* glimmerDeath.sks in Resources */,
 				43A01BBD1843D9F400E31A5E /* Main_iPhone.storyboard in Resources */,
+				436414CC184DF833003EB5C1 /* Music-Win.aifc in Resources */,
+				43A01C391843F55700E31A5E /* bokeh.png in Resources */,
+				4384A24F1844B1CB00287EAA /* Dosis-ExtraBold.ttf in Resources */,
+				4384A2521844B1CB00287EAA /* Dosis-Medium.ttf in Resources */,
+				436414C4184DF72B003EB5C1 /* Char-Catch.aifc in Resources */,
+				4384A2541844B1CB00287EAA /* Dosis-SemiBold.ttf in Resources */,
+				436414CB184DF833003EB5C1 /* Music-Level.aifc in Resources */,
+				4384A2511844B1CB00287EAA /* Dosis-Light.ttf in Resources */,
 				43A01BB41843D9F400E31A5E /* InfoPlist.strings in Resources */,
+				4384A2531844B1CB00287EAA /* Dosis-Regular.ttf in Resources */,
+				43AEA5F818478A1B004C15E1 /* gradient-01-small.png in Resources */,
+				436414C9184DF833003EB5C1 /* Char-Catch.aifc in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,13 +415,50 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		02DAAC4832D9495DA9F9C942 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D7976D647D1045C5971BB941 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		43A01BA01843D9F400E31A5E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4384A2571844B8B100287EAA /* GameOverScene.m in Sources */,
+				43E3E40B1850B43C005607C6 /* IntroScene.m in Sources */,
 				43A01BC61843D9F400E31A5E /* MyScene.m in Sources */,
+				4384A2451844AC9B00287EAA /* ChildSprite.m in Sources */,
 				43A01BC31843D9F400E31A5E /* ViewController.m in Sources */,
+				43A01BE81843DA3D00E31A5E /* GlimmerSprite.m in Sources */,
 				43A01BBA1843D9F400E31A5E /* AppDelegate.m in Sources */,
 				43A01BB61843D9F400E31A5E /* main.m in Sources */,
 			);
@@ -403,13 +594,16 @@
 		};
 		43A01BE11843D9F400E31A5E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AFF6F365CD3946C7A2E8BFD8 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Glimmer/Glimmer-Prefix.pch";
 				INFOPLIST_FILE = "Glimmer/Glimmer-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "A4EC8527-6524-4AAF-B3A1-94289ADD9ED3";
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
 				WRAPPER_EXTENSION = app;
 			};
@@ -417,13 +611,16 @@
 		};
 		43A01BE21843D9F400E31A5E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AFF6F365CD3946C7A2E8BFD8 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Glimmer/Glimmer-Prefix.pch";
 				INFOPLIST_FILE = "Glimmer/Glimmer-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "6691425B-99F8-4F93-B003-EFDF621EFFCE";
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
 				WRAPPER_EXTENSION = app;
 			};
@@ -490,6 +687,7 @@
 				43A01BE21843D9F400E31A5E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		43A01BE31843D9F400E31A5E /* Build configuration list for PBXNativeTarget "GlimmerTests" */ = {
 			isa = XCConfigurationList;
@@ -498,6 +696,7 @@
 				43A01BE51843D9F400E31A5E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

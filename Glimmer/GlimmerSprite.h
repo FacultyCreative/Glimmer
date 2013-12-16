@@ -10,4 +10,6 @@
 
 @interface GlimmerSprite : SKSpriteNode
 
+@property int type;
+
 @end

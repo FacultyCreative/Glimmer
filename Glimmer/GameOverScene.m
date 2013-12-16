@@ -10,6 +10,7 @@
 #import "GameOverScene.h"
 #import "sprites.h"
 #import "MyScene.h"
+#import "BackgroundSprite.h"
 #import <TestFlightSDK/TestFlight.h>
 #import <GameKit/GameKit.h>
 @implementation GameOverScene
@@ -20,117 +21,99 @@
     if (self = [super initWithSize:size]) {
         
         /* Setup your scene here */
-        self.backgroundColor = [SKColor lightGrayColor];
+        NSLog(@"GAME OVER");
         
-        SKSpriteNode *sky =
-        [SKSpriteNode spriteNodeWithTexture:[SKTexture textureWithImageNamed:@"gradient-01-small"]];
-        sky.position = CGPointMake(size.width/2, size.height - sky.size.height/2);
-        [self addChild:sky];
+                BackgroundSprite *bg = [[BackgroundSprite alloc] init];
+                [self addChild:bg];
+                
+                NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                
+                int highScore = [defaults integerForKey:@"score"];
+                
+                int highMulti = [defaults integerForKey:@"multiplier"];
+                
+                int lastScore = [defaults integerForKey:@"last_score"];
+                
+                int lastMulti = [defaults integerForKey:@"last_multiplier"];
+                
+                
+                SKLabelNode *yourScoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Dosis-Regular"];
+                yourScoreLabel.text = @"YOUR SCORE";
+                yourScoreLabel.fontSize = 15;
+                yourScoreLabel.fontColor = [UIColor yellowColor];
+                yourScoreLabel.position = CGPointMake(size.width - 15, size.height - 105);
+                [yourScoreLabel setHorizontalAlignmentMode:SKLabelHorizontalAlignmentModeRight];
+                [self addChild:yourScoreLabel];
+                
+                SKLabelNode *lastScoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Dosis-Regular"];
+                lastScoreLabel.text = [NSString stringWithFormat:@"%d", lastScore];
+                lastScoreLabel.fontSize = 45;
+                lastScoreLabel.position = CGPointMake( size.width - 15, size.height -145);
+                [lastScoreLabel setHorizontalAlignmentMode:SKLabelHorizontalAlignmentModeRight];
+                [self addChild:lastScoreLabel];
+                
+                SKLabelNode *_scoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Dosis-Regular"];
+                _scoreLabel.text = [NSString stringWithFormat:@"ALL TIME: %d", highScore];
+                _scoreLabel.fontSize = 15;
+                _scoreLabel.position = CGPointMake( size.width - 15, size.height - 165);
+                [_scoreLabel setHorizontalAlignmentMode:SKLabelHorizontalAlignmentModeRight];
+                [self addChild:_scoreLabel];
+                
+                
+                SKLabelNode *maxComboLabel = [SKLabelNode labelNodeWithFontNamed:@"Dosis-Regular"];
+                maxComboLabel.text = @"MAX COMBO";
+                maxComboLabel.fontSize = 15;
+                maxComboLabel.fontColor = [UIColor yellowColor];
+                maxComboLabel.position = CGPointMake(size.width - 15, size.height - 205);
+                [maxComboLabel setHorizontalAlignmentMode:SKLabelHorizontalAlignmentModeRight];
+                [self addChild:maxComboLabel];
+                
+                
+                SKLabelNode *lastMultiLabel = [SKLabelNode labelNodeWithFontNamed:@"Dosis-Regular"];
+                lastMultiLabel.text = [NSString stringWithFormat:@"X%d", lastMulti];
+                lastMultiLabel.fontSize = 45;
+                lastMultiLabel.position = CGPointMake( size.width - 15, size.height - 245);
+                [lastMultiLabel setHorizontalAlignmentMode:SKLabelHorizontalAlignmentModeRight];
+                [self addChild:lastMultiLabel];
+                
+                
+                SKLabelNode *multiLabel = [SKLabelNode labelNodeWithFontNamed:@"Dosis-Regular"];
+                multiLabel.text = [NSString stringWithFormat:@"ALL TIME: X%d", highMulti];
+                multiLabel.fontSize = 15;
+                multiLabel.position = CGPointMake( size.width - 15, size.height - 265);
+                [multiLabel setHorizontalAlignmentMode:SKLabelHorizontalAlignmentModeRight];
+                [self addChild:multiLabel];
+                
+                SKSpriteNode *child = [SKSpriteNode spriteNodeWithTexture:SPRITEBUNDLE_TEX_CHAR_REGULAR_CELEBRATE_CHAR_CELEBRATE_07];
+                //child.anchorPoint = CGPointMake(0, 0);
+                child.position = CGPointMake((self.size.width/4), 120);
+                
+                child.name = @"child";
+                
+                [self addChild:child];
+                
+                 //SKAction *dance = [SKAction animateWithTextures:SPRITEBUNDLE_ANIM_CHAR_REGULAR_CELEBRATE_CHAR_CELEBRATE timePerFrame:0.25 resize:NO restore:YES];
+                 //[child runAction:dance];
+                
         
-        SKSpriteNode *tree1 =
-        [SKSpriteNode spriteNodeWithTexture:SPRITEBUNDLE_TEX_BACKGROUND_TREE_01];
-        tree1.position = CGPointMake(50.0, 158.0);
-        [self addChild:tree1];
+                SKAction *dance = [SKAction animateWithTextures:SPRITEBUNDLE_ANIM_CHAR_REGULAR_CELEBRATE_CHAR_CELEBRATE timePerFrame:0.25 resize:YES restore:NO];
+                SKAction *jump = [SKAction moveToY:350.0 duration:0.25];
+                SKAction *land = [SKAction moveToY:120.0 duration:0.25];
+                SKAction *wait = [SKAction waitForDuration:0.25];
+                SKAction *jumpAndLand = [SKAction sequence:@[ jump, wait, land, wait, wait, wait, wait, wait]];
+                SKAction *repeatDance = [SKAction repeatActionForever:dance];
+                SKAction *repeatJump = [SKAction repeatActionForever:jumpAndLand];
+                SKAction *fullDance = [SKAction group:@[repeatJump, repeatDance]];
+                
+                [child runAction:fullDance];
+                
+                SKAction * waitMusic = [SKAction waitForDuration:1.0];
+                SKAction * musicBlock = [SKAction runBlock:^{
+                    [self playBackgroundMusic:@"Music-Win.aifc"];
+                }];
+                
+                [self runAction:[SKAction sequence:@[waitMusic, musicBlock]]];
         
-        SKSpriteNode *tree2 =
-        [SKSpriteNode spriteNodeWithTexture:SPRITEBUNDLE_TEX_BACKGROUND_TREE_02];
-        tree2.position = CGPointMake(size.width - 40.0, 158.0);
-        [self addChild:tree2];
-        
-        SKSpriteNode *grass =
-        [SKSpriteNode spriteNodeWithTexture:SPRITEBUNDLE_TEX_BACKGROUND_GRASS];
-        grass.position = CGPointMake(size.width/2, 65.0);
-        [self addChild:grass];
-        
-        SKSpriteNode *bg3 =
-        [SKSpriteNode spriteNodeWithTexture:SPRITEBUNDLE_TEX_CONTROLS_BUTTONS];
-        bg3.position = CGPointMake(size.width/2, 45.0);
-        [self addChild:bg3];
-        
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        
-        int highScore = [defaults integerForKey:@"score"];
-        
-        int highMulti = [defaults integerForKey:@"multiplier"];
-        
-        int lastScore = [defaults integerForKey:@"last_score"];
-        
-        int lastMulti = [defaults integerForKey:@"last_multiplier"];
-        
-        
-        SKLabelNode *yourScoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Dosis-Regular"];
-        yourScoreLabel.text = @"YOUR SCORE";
-        yourScoreLabel.fontSize = 15;
-        yourScoreLabel.fontColor = [UIColor yellowColor];
-        yourScoreLabel.position = CGPointMake(size.width - 15, size.height - 105);
-        [yourScoreLabel setHorizontalAlignmentMode:SKLabelHorizontalAlignmentModeRight];
-        [self addChild:yourScoreLabel];
-        
-        SKLabelNode *lastScoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Dosis-Regular"];
-        lastScoreLabel.text = [NSString stringWithFormat:@"%d", lastScore];
-        lastScoreLabel.fontSize = 45;
-        lastScoreLabel.position = CGPointMake( size.width - 15, size.height -145);
-        [lastScoreLabel setHorizontalAlignmentMode:SKLabelHorizontalAlignmentModeRight];
-        [self addChild:lastScoreLabel];
-        
-        SKLabelNode *_scoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Dosis-Regular"];
-        _scoreLabel.text = [NSString stringWithFormat:@"ALL TIME: %d", highScore];
-        _scoreLabel.fontSize = 15;
-        _scoreLabel.position = CGPointMake( size.width - 15, size.height - 165);
-        [_scoreLabel setHorizontalAlignmentMode:SKLabelHorizontalAlignmentModeRight];
-        [self addChild:_scoreLabel];
-        
-        
-        SKLabelNode *maxComboLabel = [SKLabelNode labelNodeWithFontNamed:@"Dosis-Regular"];
-        maxComboLabel.text = @"MAX COMBO";
-        maxComboLabel.fontSize = 15;
-        maxComboLabel.fontColor = [UIColor yellowColor];
-        maxComboLabel.position = CGPointMake(size.width - 15, size.height - 205);
-        [maxComboLabel setHorizontalAlignmentMode:SKLabelHorizontalAlignmentModeRight];
-        [self addChild:maxComboLabel];
-        
-        
-        SKLabelNode *lastMultiLabel = [SKLabelNode labelNodeWithFontNamed:@"Dosis-Regular"];
-        lastMultiLabel.text = [NSString stringWithFormat:@"X%d", lastMulti];
-        lastMultiLabel.fontSize = 45;
-        lastMultiLabel.position = CGPointMake( size.width - 15, size.height - 245);
-        [lastMultiLabel setHorizontalAlignmentMode:SKLabelHorizontalAlignmentModeRight];
-        [self addChild:lastMultiLabel];
-        
-        
-        SKLabelNode *multiLabel = [SKLabelNode labelNodeWithFontNamed:@"Dosis-Regular"];
-        multiLabel.text = [NSString stringWithFormat:@"ALL TIME: X%d", highMulti];
-        multiLabel.fontSize = 15;
-        multiLabel.position = CGPointMake( size.width - 15, size.height - 265);
-        [multiLabel setHorizontalAlignmentMode:SKLabelHorizontalAlignmentModeRight];
-        [self addChild:multiLabel];
-        
-        SKSpriteNode *child = [SKSpriteNode spriteNodeWithTexture:SPRITEBUNDLE_TEX_CHAR_STAND_CHAR_STAND_RIGHT];
-        
-        child.position = CGPointMake((self.size.width/4), 120);
-        
-        child.name = @"child";
-        
-        [self addChild:child];
-        
-        SKAction *dance = [SKAction animateWithTextures:SPRITEBUNDLE_ANIM_CHAR_CELEBRATE_CHAR_CELEBRATE timePerFrame:0.25];
-        
-        SKAction *jump = [SKAction moveToY:350.0 duration:0.25];
-        SKAction *land = [SKAction moveToY:120.0 duration:0.25];
-        SKAction *wait = [SKAction waitForDuration:0.25];
-        SKAction *jumpAndLand = [SKAction sequence:@[wait, jump, wait, land, wait, wait, wait, wait]];
-        SKAction *repeatDance = [SKAction repeatActionForever:dance];
-        SKAction *repeatJump = [SKAction repeatActionForever:jumpAndLand];
-        SKAction *fullDance = [SKAction group:@[repeatJump, repeatDance]];
-        
-        [child runAction:fullDance];
-        
-        SKAction * waitMusic = [SKAction waitForDuration:1.0];
-        SKAction * musicBlock = [SKAction runBlock:^{
-            [self playBackgroundMusic:@"Music-Win.mp3"];
-        }];
-        [self runAction:[SKAction sequence:@[waitMusic, musicBlock]]];
-        //a[self authenticateLocalPlayer];
         
     }
     return self;
@@ -138,23 +121,7 @@
 
 - (void) authenticateLocalPlayer
 {
-    GKLocalPlayer *localPlayer = [GKLocalPlayer localPlayer];
-    localPlayer.authenticateHandler = ^(UIViewController *viewController, NSError *error){
-        if (viewController != nil)
-        {
-            //showAuthenticationDialogWhenReasonable: is an example method name. Create your own method that displays an authentication view when appropriate for your app.
-            [self showAuthenticationDialogWhenReasonable: viewController];
-        }
-        else if (localPlayer.isAuthenticated)
-        {
-            //authenticatedPlayer: is an example method name. Create your own method that is called after the loacal player is authenticated.
-            [self authenticatedPlayer: localPlayer];
-        }
-        else
-        {
-            [self disableGameCenter];
-        }
-    };
+   
 }
 
 
@@ -178,10 +145,41 @@
 
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    MyScene *myScene = [[MyScene alloc] initWithSize:self.size];
-    SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
-    [_backgroundMusicPlayer stop];
-    [self.view presentScene:myScene transition: reveal];
+   
+    [SKTexture preloadTextures:@[
+                                 SPRITEBUNDLE_TEX_CONTROLS_BUTTONS,
+                                 SPRITEBUNDLE_TEX_MOON_MOON_01,
+                                 SPRITEBUNDLE_TEX_MOON_MOON_02,
+                                 SPRITEBUNDLE_TEX_MOON_MOON_03,
+                                 SPRITEBUNDLE_TEX_MOON_MOON_04,
+                                 SPRITEBUNDLE_TEX_MOON_MOON_05,
+                                 SPRITEBUNDLE_TEX_MOON_MOON_06,
+                                 SPRITEBUNDLE_TEX_MOON_MOON_07,
+                                 SPRITEBUNDLE_TEX_MOON_MOON_08,
+                                 SPRITEBUNDLE_TEX_MOON_MOON_09,
+                                 SPRITEBUNDLE_TEX_MOON_MOON_10,
+                                 SPRITEBUNDLE_TEX_MOON_MOON_11,
+                                 SPRITEBUNDLE_TEX_STATE_TYPE_GAMEOVER,
+                                 SPRITEBUNDLE_TEX_STATE_TYPE_GLIMMER,
+                                 SPRITEBUNDLE_TEX_STATE_TYPE_WIN,
+                                 SPRITEBUNDLE_TEX_CHAR_REGULAR_CATCH_CHAR_CATCH_LEFT,
+                                 SPRITEBUNDLE_TEX_CHAR_REGULAR_CATCH_CHAR_CATCH_RIGHT,
+                                 SPRITEBUNDLE_TEX_CHAR_REGULAR_ZOOM_CHAR_ZOOM_LEFT,
+                                 SPRITEBUNDLE_TEX_CHAR_REGULAR_ZOOM_CHAR_ZOOM_RIGHT,
+                                 SPRITEBUNDLE_TEX_GLIMMER_THING_01,
+                                 SPRITEBUNDLE_TEX_GLIMMER_THING_02]
+         withCompletionHandler:^
+     {
+    
+        MyScene *myScene = [[MyScene alloc] initWithSize:self.size];
+        SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
+        reveal.pausesIncomingScene = NO;
+        reveal.pausesIncomingScene = YES;
+        [_backgroundMusicPlayer stop];
+        [self.view presentScene:myScene transition: reveal];
+        [self removeFromParent];
+     }];
+
     
 }
 

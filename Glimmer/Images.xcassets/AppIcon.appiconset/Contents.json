@@ -3,13 +3,13 @@
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "GlimmerAppIcon29x29-1.png",
+      "filename" : "GlimmerAppIcon29x29@2x.png",
       "scale" : "2x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "GlimmerAppIcon40x40-1.png",
+      "filename" : "GlimmerAppIcon40x40@2x-1.png",
       "scale" : "2x"
     },
     {
@@ -25,9 +25,8 @@
       "scale" : "1x"
     },
     {
-      "size" : "29x29",
       "idiom" : "ipad",
-      "filename" : "GlimmerAppIcon29x29@2x.png",
+      "size" : "29x29",
       "scale" : "2x"
     },
     {
@@ -37,9 +36,8 @@
       "scale" : "1x"
     },
     {
-      "size" : "40x40",
       "idiom" : "ipad",
-      "filename" : "GlimmerAppIcon40x40@2x-1.png",
+      "size" : "40x40",
       "scale" : "2x"
     },
     {

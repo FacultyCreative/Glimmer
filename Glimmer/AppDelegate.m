@@ -17,8 +17,10 @@
 {
     // Override point for customization after application launch.
     // start of your application:didFinishLaunchingWithOptions // ...
-    
+    self.window.backgroundColor = [UIColor blackColor];
     [TestFlight takeOff:@"7876795f-7c4b-425d-854d-04fc4e9bc232"];
+    
+    [NewRelicAgent startWithApplicationToken:@"AA2fd08763d5d73a7163579748e2bd74a5b380ff5d"];
     // The rest of your application:didFinishLaunchingWithOptions method
     // ...
     // Authenticate Player with Game Center
@@ -43,6 +45,11 @@
 {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+}
+
+- (void)applicationDidReceiveMemoryWarning:(UIApplication *)application
+{
+    NSLog(@"MEMORY LOW");
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application

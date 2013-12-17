@@ -27,7 +27,8 @@
     //NSLog(@"RESET TEXTURE");
 
     [self removeAllActions];
-
+    SKAction *uncolor = [SKAction colorizeWithColorBlendFactor:0.0 duration:0];
+    [self runAction:uncolor];
     if([self.direction isEqualToString:@"left"]){
         [self setTexture:SPRITEBUNDLE_TEX_CHAR_REGULAR_STAND_CHAR_STAND_LEFT];        
     } else {
@@ -36,10 +37,19 @@
     
 }
 
+- (void)unsetCharacter
+{
+    SKAction *uncolor = [SKAction colorizeWithColorBlendFactor:0.0 duration:0];
+    [self runAction:uncolor];
+    [self removeAllActions];
+}
+
+
+
 -(void)miss
 {
     //NSLog(@"MISS TEXTURE");
-    [self removeAllActions];
+    [self unsetCharacter];
     SKAction *miss;
     if([self.direction isEqualToString:@"left"]){
         
@@ -55,7 +65,7 @@
 {
     //NSLog(@"CATCH TEXTURE");
 
-    [self removeAllActions];
+    [self unsetCharacter];
     SKAction *catch;
     if([self.direction isEqualToString:@"left"]){
         
@@ -71,7 +81,7 @@
 {
     //NSLog(@"DASH TEXTURE");
 
-    [self removeAllActions];
+   [self unsetCharacter];
     SKAction *dash;
 
     if([self.direction isEqualToString:@"left"]){
@@ -86,7 +96,7 @@
 {
     //NSLog(@"WALK TEXTURE");
 
-    [self removeAllActions];
+    [self unsetCharacter];
     
     SKAction *walk;
     if([self.direction isEqualToString:@"left"]){

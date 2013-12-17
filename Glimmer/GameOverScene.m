@@ -145,42 +145,13 @@
 
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-   
-    [SKTexture preloadTextures:@[
-                                 SPRITEBUNDLE_TEX_CONTROLS_BUTTONS,
-                                 SPRITEBUNDLE_TEX_MOON_MOON_01,
-                                 SPRITEBUNDLE_TEX_MOON_MOON_02,
-                                 SPRITEBUNDLE_TEX_MOON_MOON_03,
-                                 SPRITEBUNDLE_TEX_MOON_MOON_04,
-                                 SPRITEBUNDLE_TEX_MOON_MOON_05,
-                                 SPRITEBUNDLE_TEX_MOON_MOON_06,
-                                 SPRITEBUNDLE_TEX_MOON_MOON_07,
-                                 SPRITEBUNDLE_TEX_MOON_MOON_08,
-                                 SPRITEBUNDLE_TEX_MOON_MOON_09,
-                                 SPRITEBUNDLE_TEX_MOON_MOON_10,
-                                 SPRITEBUNDLE_TEX_MOON_MOON_11,
-                                 SPRITEBUNDLE_TEX_STATE_TYPE_GAMEOVER,
-                                 SPRITEBUNDLE_TEX_STATE_TYPE_GLIMMER,
-                                 SPRITEBUNDLE_TEX_STATE_TYPE_WIN,
-                                 SPRITEBUNDLE_TEX_CHAR_REGULAR_CATCH_CHAR_CATCH_LEFT,
-                                 SPRITEBUNDLE_TEX_CHAR_REGULAR_CATCH_CHAR_CATCH_RIGHT,
-                                 SPRITEBUNDLE_TEX_CHAR_REGULAR_ZOOM_CHAR_ZOOM_LEFT,
-                                 SPRITEBUNDLE_TEX_CHAR_REGULAR_ZOOM_CHAR_ZOOM_RIGHT,
-                                 SPRITEBUNDLE_TEX_GLIMMER_THING_01,
-                                 SPRITEBUNDLE_TEX_GLIMMER_THING_02]
-         withCompletionHandler:^
-     {
     
         MyScene *myScene = [[MyScene alloc] initWithSize:self.size];
         SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
-        reveal.pausesIncomingScene = NO;
-        reveal.pausesIncomingScene = YES;
         [_backgroundMusicPlayer stop];
         [self.view presentScene:myScene transition: reveal];
         [self removeFromParent];
-     }];
 
-    
 }
 
 - (void)playBackgroundMusic:(NSString *)filename {

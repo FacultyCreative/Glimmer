@@ -11,5 +11,8 @@
 @interface GlimmerSprite : SKSpriteNode
 
 @property int type;
+@property CGPoint destination;
+@property CGPoint velocity;
+@property BOOL isBonus;
 
 @end

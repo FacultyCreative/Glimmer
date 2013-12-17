@@ -22,7 +22,8 @@ float const BASE_WALK = 250.0;
 float const BASE_DASH = 500.0;
 float const BASE_CHILD_MOVE = 250.0;
 float const BASE_GLIMMER = 120.0;
-float const LEVEL_MAX = 800;
+float const LEVEL_MAX = 1600;
+float const BASE_BONUS_COUNT = 20;
 
 @implementation MyScene
 {
@@ -32,6 +33,7 @@ float const LEVEL_MAX = 800;
     CGPoint _velocity;
     
     float GLIMMER_MOVE_PER_SEC;
+    float GLIMMER_MOVE_PRE_BONUS;
     float CHILD_MOVE_PER_SECOND;
     float DASH;
     float WALK;
@@ -39,6 +41,9 @@ float const LEVEL_MAX = 800;
     float GAP;
     float LEVEL;
     float musicRate;
+    
+    BOOL isBonus;
+    float bonusCount;
     
     int nextBlueCounter;
     int nextBlue;
@@ -78,16 +83,18 @@ float const LEVEL_MAX = 800;
 
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
-        
+        isBonus = NO;
+        bonusCount = BASE_BONUS_COUNT;
         DASH = BASE_DASH;
         WALK = BASE_WALK;
         CHILD_MOVE_PER_SECOND = BASE_CHILD_MOVE;
         GLIMMER_MOVE_PER_SEC = BASE_GLIMMER;
+        GLIMMER_MOVE_PRE_BONUS = BASE_GLIMMER;
         LEVEL_COUNT = 1.0;
         _firstTouch = NO;
         _gameOver = NO;
-        nextRed = (arc4random() % 15) + 5;
-        nextBlue = (arc4random() % 15) + 5;
+        nextRed = (arc4random() % 5) + 5;
+        nextBlue = (arc4random() % 25) + 10;
         nextRedCounter = 0;
         nextBlueCounter = 0;
         maxLevel = 0;
@@ -98,13 +105,11 @@ float const LEVEL_MAX = 800;
         lastScore = 0;
         LEVEL = 0;
         musicRate = 1.0;
-        /* Setup your scene here */
         
+        /* Setup your scene here */
         lastX = 1;
         
         SKNode *staticEls = [[SKNode alloc] init];
-        
-        
         
         BackgroundSprite *bg = [[BackgroundSprite alloc] init];
         [bg setBlendMode:SKBlendModeReplace];
@@ -130,7 +135,7 @@ float const LEVEL_MAX = 800;
         [self addChild:btn];
         btn.alpha = 0.0;
         
-        _maxGlimmers = 10;
+        _maxGlimmers = 20;
         _multiplier = 1;
         _score = 0;
         _lives = 5;
@@ -231,6 +236,15 @@ float const LEVEL_MAX = 800;
     
     if(glimmer.type != 3){
     
+        if(glimmer.type == 2){
+            for (GlimmerSprite *g in _glimmers) {
+                [g removeFromParent];
+            }
+            [_glimmers removeAllObjects];
+            isBonus = YES;
+            bonusCount = BASE_BONUS_COUNT;
+        }
+        
         _multiplier++;
         
         if(highMulti < _multiplier){
@@ -258,11 +272,16 @@ float const LEVEL_MAX = 800;
             if(WALK < LEVEL_MAX){
                 WALK *= 1.05;
                 DASH *= 1.05;
-                GLIMMER_MOVE_PER_SEC *= 1.05;
+                if(!glimmer.isBonus){
+                    GLIMMER_MOVE_PER_SEC = GLIMMER_MOVE_PRE_BONUS;
+                    GLIMMER_MOVE_PER_SEC *= 1.05;
+                    GLIMMER_MOVE_PRE_BONUS = GLIMMER_MOVE_PER_SEC;
+                }
+                
             }
             
             
-            musicRate += 0.1;
+            musicRate += 0.02;
             if(musicRate > 2){
                 musicRate = 2;
             }
@@ -323,7 +342,7 @@ float const LEVEL_MAX = 800;
                                
                                GlimmerSprite *glimmer = (GlimmerSprite *)node;
                                
-                               CGRect smallerFrame = CGRectMake(_child.frame.origin.x, _child.frame.origin.y + 60.0, _child.frame.size.width - 10.0, 20.0);
+                               CGRect smallerFrame = CGRectMake(_child.frame.origin.x, _child.frame.origin.y + 10, _child.frame.size.width - 10.0, 50.0);
                                
                                if (CGRectIntersectsRect(smallerFrame, glimmer.frame)) {
 
@@ -349,29 +368,57 @@ float const LEVEL_MAX = 800;
             }
             glimmer.type = 1;
             
-            if(nextBlueCounter == nextBlue){
-                nextBlue = (arc4random() % 15) + 5;
-                nextBlueCounter = 0;
-                [glimmer setColor:[SKColor colorWithRed:0.164705882 green:.764705882 blue:.941176471 alpha:1]];
-                [glimmer setColorBlendFactor:1.0];
-                glimmer.type = 2;
+            float maxGap = LEVEL_COUNT/LEVEL_THRESHOLD;
+            if(maxGap > 5){
+                maxGap = 5;
+            }
+            GAP = (((arc4random() % 100)/100.0f)*.5) + 0.5 - (maxGap)*0.02;
+            
+            
+            if(isBonus && bonusCount > 0){
+                glimmer.isBonus = YES;
+                GLIMMER_MOVE_PER_SEC = BASE_GLIMMER * 3;
+                _maxGlimmers = BASE_BONUS_COUNT;
+                bonusCount --;
+                GAP = 0.1;
+                if(bonusCount == 0){
+                    isBonus = NO;
+                    bonusCount = BASE_BONUS_COUNT;
+                    _maxGlimmers = 10;
+                    GAP = 1;
+                }
                 
-
-            } else if(nextRedCounter == nextRed){
-                nextRed = (arc4random() % 15) + 5;
-                nextRedCounter = 0;
-                [glimmer setColor:[SKColor redColor]];
-                [glimmer setColorBlendFactor:1.0];
-                glimmer.type = 3;
+                glimmer.position = CGPointMake(_child.position.x, self.view.frame.size.height);
             } else {
-                nextRedCounter++;
-                nextBlueCounter++;
+            
+                if(nextBlueCounter == nextBlue){
+                    
+                    nextBlue = (arc4random() % 25) + 25;
+                    nextBlueCounter = 0;
+                    [glimmer setColor:[SKColor colorWithRed:0.164705882 green:.764705882 blue:.941176471 alpha:1]];
+                    [glimmer setColorBlendFactor:1.0];
+                    glimmer.type = 2;
+                    
+
+                } else if(nextRedCounter == nextRed){
+                    nextRed = (arc4random() % 3) + 7;
+                    nextRedCounter = 0;
+                    [glimmer setColor:[SKColor redColor]];
+                    [glimmer setColorBlendFactor:1.0];
+                    glimmer.type = 3;
+                } else {
+                    nextRedCounter++;
+                    nextBlueCounter++;
+                    
+                }
+                
+                NSInteger r = arc4random()%4 + 1;
+                
+                glimmer.position = CGPointMake(r * (self.view.frame.size.width / 4) - ((self.view.frame.size.width / 4)/2), self.view.frame.size.height);
             }
             
             
-            NSInteger r = arc4random()%4 + 1;
-            
-            glimmer.position = CGPointMake(r * (self.view.frame.size.width / 4) - ((self.view.frame.size.width / 4)/2), self.view.frame.size.height);
+            [self moveSprite:glimmer toward:CGPointMake(glimmer.position.x, 0)];
             
             glimmer.name = @"glimmer";
             
@@ -385,10 +432,11 @@ float const LEVEL_MAX = 800;
             [_glimmerParent addChild:glimmer];
         }
     
-        GAP = (((arc4random() % 100)/100.0f)*.5) + 0.5 - (LEVEL_COUNT/LEVEL_THRESHOLD)*0.02;
-        [timer invalidate];
-        timer = [NSTimer timerWithTimeInterval:GAP target:self selector:@selector(makeNewGlimmer) userInfo:nil repeats:NO];
-        [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
+    [timer invalidate];
+    timer = [NSTimer timerWithTimeInterval:GAP target:self selector:@selector(makeNewGlimmer) userInfo:nil repeats:NO];
+    [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
+    
+    
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -407,7 +455,7 @@ float const LEVEL_MAX = 800;
         timer = [NSTimer timerWithTimeInterval:GAP target:self selector:@selector(makeNewGlimmer) userInfo:nil repeats:YES];
         [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
         
-        [self playBackgroundMusic:@"Music-Level.aifc"];
+        [self playBackgroundMusic:@"528414_Robotic-Toothpaste.aifc"];
         
         _firstTouch = YES;
         
@@ -491,9 +539,14 @@ float const LEVEL_MAX = 800;
     }
     
     
-    for (SKSpriteNode *glimmer in _glimmers) {
-       
-        [self moveSprite:glimmer velocity:CGPointMake(0, -GLIMMER_MOVE_PER_SEC)];
+    for (GlimmerSprite *glimmer in _glimmers) {
+        if(glimmer.isBonus){
+            [self moveSprite:glimmer toward:CGPointMake(_child.position.x, _child.position.y - 20)];
+            [self moveSprite:glimmer velocity:glimmer.velocity];
+        } else {
+            [self moveSprite:glimmer velocity:CGPointMake(0, -GLIMMER_MOVE_PER_SEC)];
+        }
+        
         
     }
     
@@ -525,9 +578,17 @@ float const LEVEL_MAX = 800;
     
     [_child miss];
     
-    SKAction *moveAction = [SKAction playSoundFileNamed:@"Char-Miss.aifc" waitForCompletion:NO];
+    SKAction *pulseRed = [SKAction sequence:@[
+                                              [SKAction waitForDuration:0.1],
+                                              [SKAction colorizeWithColor:[SKColor redColor] colorBlendFactor:1.0 duration:0.15],
+                                              [SKAction waitForDuration:0.1],
+                                              [SKAction colorizeWithColor:[SKColor redColor] colorBlendFactor:1.0 duration:0.15],
+                                              [SKAction colorizeWithColorBlendFactor:0.0 duration:0.15]]];
+    [_child runAction:pulseRed];
     
-    [self runAction:moveAction];
+    SKAction *missAction = [SKAction playSoundFileNamed:@"Char-Miss.aifc" waitForCompletion:NO];
+    
+    [self runAction:missAction];
     
     _multiplier = 1;
     _multiplierLabel.text = [NSString stringWithFormat:@"x%li", (long)_multiplier];
@@ -640,6 +701,16 @@ float const LEVEL_MAX = 800;
 }
 
 
+-(void)moveSprite:(GlimmerSprite*)glimmer toward:(CGPoint)location{
+    CGPoint offset = CGPointMake(location.x - glimmer.position.x, location.y - glimmer.position.y);
+    
+    CGFloat length = sqrtf(offset.x * offset.x + offset.y * offset.y);
+    
+    CGPoint direction = CGPointMake(offset.x / length, offset.y / length);
+    
+    glimmer.velocity = CGPointMake(direction.x * GLIMMER_MOVE_PER_SEC,
+                            direction.y * GLIMMER_MOVE_PER_SEC);
+}
 
 - (void)moveChildToward:(CGPoint)location {
     
@@ -657,7 +728,6 @@ float const LEVEL_MAX = 800;
     // 1
     CGPoint newPosition = _child.position;
     CGPoint newVelocity = _velocity;
-    
     
     if(newPosition.x > lastPoint.x && [_child.direction isEqualToString:@"right"]){
         newVelocity = CGPointMake(0, 0);

@@ -26,6 +26,8 @@
 		4384A2531844B1CB00287EAA /* Dosis-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4384A24C1844B1CB00287EAA /* Dosis-Regular.ttf */; };
 		4384A2541844B1CB00287EAA /* Dosis-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4384A24D1844B1CB00287EAA /* Dosis-SemiBold.ttf */; };
 		4384A2571844B8B100287EAA /* GameOverScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 4384A2561844B8B100287EAA /* GameOverScene.m */; };
+		438F3F98185F9F7400BBB57B /* 528414_Robotic-Toothpaste.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 438F3F97185F9F7400BBB57B /* 528414_Robotic-Toothpaste.mp3 */; };
+		438F3F9A185FB3BE00BBB57B /* 528414_Robotic-Toothpaste.aifc in Resources */ = {isa = PBXBuildFile; fileRef = 438F3F99185FB3BE00BBB57B /* 528414_Robotic-Toothpaste.aifc */; };
 		43A01BA81843D9F400E31A5E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43A01BA71843D9F400E31A5E /* Foundation.framework */; };
 		43A01BAA1843D9F400E31A5E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43A01BA91843D9F400E31A5E /* CoreGraphics.framework */; };
 		43A01BAC1843D9F400E31A5E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43A01BAB1843D9F400E31A5E /* UIKit.framework */; };
@@ -149,6 +151,8 @@
 		4384A24D1844B1CB00287EAA /* Dosis-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-SemiBold.ttf"; sourceTree = "<group>"; };
 		4384A2551844B8B100287EAA /* GameOverScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverScene.h; sourceTree = "<group>"; };
 		4384A2561844B8B100287EAA /* GameOverScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameOverScene.m; sourceTree = "<group>"; };
+		438F3F97185F9F7400BBB57B /* 528414_Robotic-Toothpaste.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "528414_Robotic-Toothpaste.mp3"; sourceTree = "<group>"; };
+		438F3F99185FB3BE00BBB57B /* 528414_Robotic-Toothpaste.aifc */ = {isa = PBXFileReference; lastKnownFileType = file; path = "528414_Robotic-Toothpaste.aifc"; sourceTree = "<group>"; };
 		43A01BA41843D9F400E31A5E /* Glimmer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Glimmer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		43A01BA71843D9F400E31A5E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		43A01BA91843D9F400E31A5E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -529,6 +533,8 @@
 		43E3E4061850B3ED005607C6 /* Particles */ = {
 			isa = PBXGroup;
 			children = (
+				438F3F97185F9F7400BBB57B /* 528414_Robotic-Toothpaste.mp3 */,
+				438F3F99185FB3BE00BBB57B /* 528414_Robotic-Toothpaste.aifc */,
 				43A01C361843F55700E31A5E /* GlimmerGlow.sks */,
 				43A01C3E1843F7AB00E31A5E /* glimmerDeath.sks */,
 				43A01C3A1843F6F400E31A5E /* MyParticle.sks */,
@@ -654,6 +660,7 @@
 				43C72C0918534661003A5753 /* launch@2x.png in Resources */,
 				43A01C381843F55700E31A5E /* GlimmerGlow.sks in Resources */,
 				43C72C1A18534661003A5753 /* item-uniform.png in Resources */,
+				438F3F98185F9F7400BBB57B /* 528414_Robotic-Toothpaste.mp3 in Resources */,
 				43C72C0B18534661003A5753 /* bg-store@2x.png in Resources */,
 				43E3E4161850D358005607C6 /* launch.png in Resources */,
 				43C72C1018534661003A5753 /* item-book.png in Resources */,
@@ -707,6 +714,7 @@
 				43C7271B1852339E003A5753 /* start@2x.png in Resources */,
 				43C72C0618534661003A5753 /* wellfed@2x.png in Resources */,
 				43E3E40D1850B530005607C6 /* Glimmer_Screens_01-568h@2x.jpg in Resources */,
+				438F3F9A185FB3BE00BBB57B /* 528414_Robotic-Toothpaste.aifc in Resources */,
 				43C72C1318534661003A5753 /* item-jar@2x.png in Resources */,
 				4384A2511844B1CB00287EAA /* Dosis-Light.ttf in Resources */,
 				43C72C0C18534661003A5753 /* item-schoolitem.png in Resources */,
@@ -930,7 +938,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Gavin Potts (S2758M987X)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Glimmer/Glimmer-Prefix.pch";
 				INFOPLIST_FILE = "Glimmer/Glimmer-Info.plist";
@@ -950,7 +958,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Glimmer/Glimmer-Prefix.pch";

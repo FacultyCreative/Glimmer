@@ -6,12 +6,6 @@
 // project.
 
 
-// NewRelicAgent
-#define COCOAPODS_POD_AVAILABLE_NewRelicAgent
-#define COCOAPODS_VERSION_MAJOR_NewRelicAgent 3
-#define COCOAPODS_VERSION_MINOR_NewRelicAgent 130
-#define COCOAPODS_VERSION_PATCH_NewRelicAgent 0
-
 // TestFlightSDK
 #define COCOAPODS_POD_AVAILABLE_TestFlightSDK
 #define COCOAPODS_VERSION_MAJOR_TestFlightSDK 2

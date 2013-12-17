@@ -1,13 +1,10 @@
 PODS:
-  - NewRelicAgent (3.130)
   - TestFlightSDK (2.1.1-beta)
 
 DEPENDENCIES:
-  - NewRelicAgent (~> 3.130)
   - TestFlightSDK (~> 2.1.1-beta)
 
 SPEC CHECKSUMS:
-  NewRelicAgent: f43bfece2cee0be2e1f7950b40c2f5cdd04422b3
   TestFlightSDK: dea28c16f0bf65c49c4ed8939b2ae0b0ed9bf8b0
 
 COCOAPODS: 0.26.2

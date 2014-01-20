@@ -73,6 +73,8 @@ float const MULTI = 1.13;
     SKLabelNode *_lifeLabel;
     SKLabelNode *_multiplierLabel;
     SKLabelNode *_startLabel;
+    SKSpriteNode *_helpOverlay;
+    SKSpriteNode *_pauseOverlay;
     NSInteger _multiplier;
     NSInteger _score;
     NSInteger _lives;
@@ -140,6 +142,8 @@ float const MULTI = 1.13;
         [self addChild:_moon];
         
         
+        
+        
         SKSpriteNode *bg3 =
         [SKSpriteNode spriteNodeWithTexture:SPRITEBUNDLE_TEX_CONTROLS_BUTTONS];
         bg3.position = CGPointMake(size.width/2, 45.0);
@@ -159,20 +163,7 @@ float const MULTI = 1.13;
         
         _HUD = [[SKNode alloc] init];
         
-        _startLabel = [SKLabelNode labelNodeWithFontNamed:@"Dosis-Regular"];
-        _startLabel.text = @"TAP TO START";
-        _startLabel.fontColor = [UIColor whiteColor];
-        _startLabel.fontSize = 20;
-        _startLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeCenter;
-        _startLabel.position = CGPointMake( size.width/2, size.height/2);
         
-        [_HUD addChild:_startLabel];
-        
-        SKAction *fadeOutLabel = [SKAction fadeOutWithDuration:1];
-        SKAction *fadeInLabel = [SKAction fadeInWithDuration:1];
-        SKAction *fader = [SKAction sequence:@[fadeOutLabel, fadeInLabel]];
-        SKAction *faderRepeat = [SKAction repeatActionForever:fader];
-        [_startLabel runAction:faderRepeat];
         
         _scoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Dosis-Regular"];
         _scoreLabel.text = @"0";
@@ -230,7 +221,28 @@ float const MULTI = 1.13;
         
         [self addChild:_particleParent];
         
+        _startLabel = [SKLabelNode labelNodeWithFontNamed:@"Dosis-Regular"];
+        _startLabel.text = @"TAP TO START";
+        _startLabel.fontColor = [UIColor whiteColor];
+        _startLabel.fontSize = 20;
+        _startLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeCenter;
+        _startLabel.position = CGPointMake( size.width/2, size.height/2 - 100);
+        _helpOverlay = [SKSpriteNode spriteNodeWithTexture:[SKTexture textureWithImageNamed:@"overlay_help"]];
+        
+        _helpOverlay.anchorPoint = CGPointMake(0, 0);
+        [self addChild:_helpOverlay];
+        [self addChild:_startLabel];
+        
+        SKAction *fadeOutLabel = [SKAction fadeOutWithDuration:1];
+        SKAction *fadeInLabel = [SKAction fadeInWithDuration:1];
+        SKAction *fader = [SKAction sequence:@[fadeOutLabel, fadeInLabel]];
+        SKAction *faderRepeat = [SKAction repeatActionForever:fader];
+        [_startLabel runAction:faderRepeat];
+        
         SKAction *wait = [SKAction waitForDuration:0.3];
+        
+        _pauseOverlay = [[SKSpriteNode alloc] initWithTexture:[SKTexture textureWithImageNamed:@"overlay_pause"]];
+        _pauseOverlay.anchorPoint = CGPointMake(0, 0);
         
         [self runAction:wait completion:^{
             [self moveChildToward:lastPoint];
@@ -248,7 +260,7 @@ float const MULTI = 1.13;
     _backgroundMusicPlayer = [[AVAudioPlayer alloc]
                               initWithContentsOfURL:backgroundMusicURL error:&error]; _backgroundMusicPlayer.numberOfLoops = -1; [_backgroundMusicPlayer prepareToPlay];
     _backgroundMusicPlayer.enableRate = YES;
-    [_backgroundMusicPlayer play];
+    //[_backgroundMusicPlayer play];
 }
 
 - (void)setPublicHearts:(NSInteger)h
@@ -494,6 +506,7 @@ float const MULTI = 1.13;
     [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
     [_backgroundMusicPlayer play];
     [_moon setTexture:[SKTexture textureWithImageNamed:@"moon-pause"]];
+    [_pauseOverlay removeFromParent];
 }
 
 -(void)pause{
@@ -503,6 +516,7 @@ float const MULTI = 1.13;
     _lastUpdateTime = 0;
     _dt = 0;
     [_moon setTexture:[SKTexture textureWithImageNamed:@"moon-play"]];
+    [self addChild:_pauseOverlay];
 }
 
 
@@ -518,6 +532,11 @@ float const MULTI = 1.13;
             [_startLabel removeFromParent];
         }];
         
+        [_helpOverlay runAction:fadeLabel completion:^{
+            [_helpOverlay removeAllActions];
+            [_helpOverlay removeFromParent];
+        }];
+        
         GAP = 0.75;
         timer = [NSTimer timerWithTimeInterval:GAP target:self selector:@selector(makeNewGlimmer) userInfo:nil repeats:YES];
         [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
@@ -530,10 +549,19 @@ float const MULTI = 1.13;
     
     for (UITouch *touch in touches) {
         CGPoint location = [touch locationInNode:self];
+        
+        
+        
         // If the user taps on BACK Button Rectangle
         if (CGRectContainsPoint(_moon.frame, location))
         {
             [self togglePause];
+        } else if(self.isPaused) {
+            
+            if(CGRectContainsPoint(CGRectMake(0, 55, 320, 95), location)){
+                [self unpause];
+            }
+        
         } else {
             
             NSInteger nearestX = (location.x / (self.size.width/4));

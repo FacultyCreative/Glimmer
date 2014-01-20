@@ -137,6 +137,12 @@
 		43FC1F4B1862465E00EBA39A /* combo-gauge@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 43FC1F471862465E00EBA39A /* combo-gauge@2x.png */; };
 		43FC1F5218638AE400EBA39A /* GameKitHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 43FC1F5118638AE400EBA39A /* GameKitHelper.m */; };
 		43FC1F5418638BF400EBA39A /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43FC1F5318638BF400EBA39A /* GameKit.framework */; };
+		8618E883188DCAE100C66B3B /* overlay_help.png in Resources */ = {isa = PBXBuildFile; fileRef = 8618E881188DCAE100C66B3B /* overlay_help.png */; };
+		8618E884188DCAE100C66B3B /* overlay_help@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8618E882188DCAE100C66B3B /* overlay_help@2x.png */; };
+		8618E887188DCD2C00C66B3B /* overlay_pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 8618E885188DCD2C00C66B3B /* overlay_pause.png */; };
+		8618E888188DCD2C00C66B3B /* overlay_pause@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8618E886188DCD2C00C66B3B /* overlay_pause@2x.png */; };
+		8618E88B188DD3F200C66B3B /* background_continue.png in Resources */ = {isa = PBXBuildFile; fileRef = 8618E889188DD3F200C66B3B /* background_continue.png */; };
+		8618E88C188DD3F200C66B3B /* background_continue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8618E88A188DD3F200C66B3B /* background_continue@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -306,6 +312,12 @@
 		43FC1F5018638AE400EBA39A /* GameKitHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameKitHelper.h; sourceTree = "<group>"; };
 		43FC1F5118638AE400EBA39A /* GameKitHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameKitHelper.m; sourceTree = "<group>"; };
 		43FC1F5318638BF400EBA39A /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		8618E881188DCAE100C66B3B /* overlay_help.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = overlay_help.png; sourceTree = "<group>"; };
+		8618E882188DCAE100C66B3B /* overlay_help@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "overlay_help@2x.png"; sourceTree = "<group>"; };
+		8618E885188DCD2C00C66B3B /* overlay_pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = overlay_pause.png; sourceTree = "<group>"; };
+		8618E886188DCD2C00C66B3B /* overlay_pause@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "overlay_pause@2x.png"; sourceTree = "<group>"; };
+		8618E889188DD3F200C66B3B /* background_continue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background_continue.png; sourceTree = "<group>"; };
+		8618E88A188DD3F200C66B3B /* background_continue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background_continue@2x.png"; sourceTree = "<group>"; };
 		AFF6F365CD3946C7A2E8BFD8 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		C51D45C4CA544143A9917164 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -580,6 +592,12 @@
 		43E3E4051850B3D7005607C6 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				8618E889188DD3F200C66B3B /* background_continue.png */,
+				8618E88A188DD3F200C66B3B /* background_continue@2x.png */,
+				8618E885188DCD2C00C66B3B /* overlay_pause.png */,
+				8618E886188DCD2C00C66B3B /* overlay_pause@2x.png */,
+				8618E881188DCAE100C66B3B /* overlay_help.png */,
+				8618E882188DCAE100C66B3B /* overlay_help@2x.png */,
 				43E55D25187B077E004F52DE /* background-composite-new.png */,
 				43E55D26187B077E004F52DE /* background-composite-new@2x.png */,
 				4387C2B618775A1F0053F9F4 /* arrow.png */,
@@ -797,6 +815,7 @@
 				43C72C0018534661003A5753 /* tree-02@2x.png in Resources */,
 				43C72C1818534661003A5753 /* item-shield.png in Resources */,
 				43A01BBD1843D9F400E31A5E /* Main_iPhone.storyboard in Resources */,
+				8618E88B188DD3F200C66B3B /* background_continue.png in Resources */,
 				43C72BFC18534661003A5753 /* grass@2x.png in Resources */,
 				436414CC184DF833003EB5C1 /* Music-Win.aifc in Resources */,
 				43C72C0F18534661003A5753 /* item-blanket@2x.png in Resources */,
@@ -836,13 +855,17 @@
 				4384A2511844B1CB00287EAA /* Dosis-Light.ttf in Resources */,
 				43C72C0C18534661003A5753 /* item-schoolitem.png in Resources */,
 				43C72C29185352A7003A5753 /* HeartPop.sks in Resources */,
+				8618E883188DCAE100C66B3B /* overlay_help.png in Resources */,
 				43C72C1B18534661003A5753 /* item-uniform@2x.png in Resources */,
 				43FC1F401862464C00EBA39A /* life-gauge-tick.png in Resources */,
 				43A01BB41843D9F400E31A5E /* InfoPlist.strings in Resources */,
 				43C72C1418534661003A5753 /* item-pencils.png in Resources */,
 				43FC1F3F1862464C00EBA39A /* life-gauge-double@2x.png in Resources */,
+				8618E887188DCD2C00C66B3B /* overlay_pause.png in Resources */,
+				8618E884188DCAE100C66B3B /* overlay_help@2x.png in Resources */,
 				4384A2531844B1CB00287EAA /* Dosis-Regular.ttf in Resources */,
 				43FC1F421862464C00EBA39A /* life-gauge.png in Resources */,
+				8618E888188DCD2C00C66B3B /* overlay_pause@2x.png in Resources */,
 				43C72C0A18534661003A5753 /* bg-store.png in Resources */,
 				43C72BF918534661003A5753 /* grass-lose.png in Resources */,
 				43C72C0518534661003A5753 /* wellfed.png in Resources */,
@@ -852,6 +875,7 @@
 				43E3E4101850B781005607C6 /* bg-infoscreen.png in Resources */,
 				43C72C1718534661003A5753 /* item-pills@2x.png in Resources */,
 				43E3E4151850D358005607C6 /* launch-568h@2x.png in Resources */,
+				8618E88C188DD3F200C66B3B /* background_continue@2x.png in Resources */,
 				43E3E4171850D358005607C6 /* launch@2x.png in Resources */,
 				43C72C0D18534661003A5753 /* item-schoolitem@2x.png in Resources */,
 			);
@@ -1066,14 +1090,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Gavin Potts (S2758M987X)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Glimmer/Glimmer-Prefix.pch";
 				INFOPLIST_FILE = "Glimmer/Glimmer-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "A4EC8527-6524-4AAF-B3A1-94289ADD9ED3";
+				PROVISIONING_PROFILE = "";
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
@@ -1086,15 +1110,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Glimmer/Glimmer-Prefix.pch";
 				INFOPLIST_FILE = "Glimmer/Glimmer-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6691425B-99F8-4F93-B003-EFDF621EFFCE";
+				PROVISIONING_PROFILE = "";
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;

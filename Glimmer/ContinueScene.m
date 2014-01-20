@@ -16,10 +16,15 @@ int secondsLeft;
 - (id)initWithSize:(CGSize)size
 {
     if (self = [super initWithSize:size]) {
+        
+        SKSpriteNode *bg = [[SKSpriteNode alloc] initWithTexture:[SKTexture textureWithImageNamed:@"background_continue"]];
+        bg.anchorPoint = CGPointMake(0, 0);
+        [self addChild:bg];
+        
         NSString *pills = [[GSKeychain systemKeychain] secretForKey:@"Pills"];
         self.continues = [pills intValue];
         
-        SKSpriteNode *pillSprite = [[SKSpriteNode alloc] initWithImageNamed:@"item-pills"];
+        /*SKSpriteNode *pillSprite = [[SKSpriteNode alloc] initWithImageNamed:@"item-pills"];
         pillSprite.position = CGPointMake(size.width/2 + 5, size.height/2);
         [self addChild:pillSprite];
         
@@ -55,7 +60,7 @@ int secondsLeft;
                                                    text:@"CONTINUE?"];
         
         useContinue.position = CGPointMake( size.width/2 - useContinue.size.width/2, 150);
-        [self addChild:useContinue];
+        [self addChild:useContinue];*/
     
     }
     

@@ -164,7 +164,7 @@
                 
                 SKAction * waitMusic = [SKAction waitForDuration:1.0];
                 SKAction * musicBlock = [SKAction runBlock:^{
-                    [self playBackgroundMusic:@"Music-Win.aifc"];
+                    //[self playBackgroundMusic:@"Music-Win.aifc"];
                 }];
         
                 SKRoundedButton *playAgain = [SKRoundedButton rectangleWithRect:CGRectMake(0, 0, 280, 40)

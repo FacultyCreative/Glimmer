@@ -15,15 +15,17 @@
 #import "BackgroundSprite.h"
 #import <QuartzCore/QuartzCore.h>
 #import <Foundation/Foundation.h>
+#import "ContinueScene.h"
 
 float const SCORE_PER_GLIMMER = 100.0;
-float const LEVEL_THRESHOLD = 3.0;
-float const BASE_WALK = 250.0;
-float const BASE_DASH = 500.0;
-float const BASE_CHILD_MOVE = 250.0;
-float const BASE_GLIMMER = 120.0;
-float const LEVEL_MAX = 1600;
+float const LEVEL_THRESHOLD = 5.0;
+float const BASE_WALK = 300.0;
+float const BASE_DASH = 600.0;
+float const BASE_CHILD_MOVE = 300.0;
+float const BASE_GLIMMER = 170.0;
+float const LEVEL_MAX = 11;
 float const BASE_BONUS_COUNT = 20;
+float const MULTI = 1.13;
 
 @implementation MyScene
 {
@@ -58,11 +60,14 @@ float const BASE_BONUS_COUNT = 20;
     BOOL _gameOver;
     BOOL _firstTouch;
     
+    NSNumberFormatter *_formatter;
     NSMutableArray *_glimmers;
     SKNode *_glimmerParent;
     SKNode *_particleParent;
     SKNode *_HUD;
+    //SKEmitterNode *_glimmerEmitter;
     NSMutableArray *_hearts;
+    NSMutableArray *_comboBlips;
     NSInteger _maxGlimmers;
     SKLabelNode *_scoreLabel;
     SKLabelNode *_lifeLabel;
@@ -80,6 +85,8 @@ float const BASE_BONUS_COUNT = 20;
     NSTimer *timer;
     
 }
+
+@synthesize publicHearts = _publicHearts;
 
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
@@ -107,7 +114,17 @@ float const BASE_BONUS_COUNT = 20;
         musicRate = 1.0;
         
         /* Setup your scene here */
+        
+        
+        
         lastX = 1;
+        
+        _formatter = [[NSNumberFormatter alloc] init];
+        NSString *groupingSeparator = [[NSLocale currentLocale] objectForKey:NSLocaleGroupingSeparator];
+        [_formatter setGroupingSeparator:groupingSeparator];
+        [_formatter setGroupingSize:3];
+        [_formatter setAlwaysShowsDecimalSeparator:NO];
+        [_formatter setUsesGroupingSeparator:YES];
         
         SKNode *staticEls = [[SKNode alloc] init];
         
@@ -117,12 +134,11 @@ float const BASE_BONUS_COUNT = 20;
         
         [self addChild:staticEls];
         
-        _moon = [SKSpriteNode spriteNodeWithTexture:SPRITEBUNDLE_TEX_MOON_MOON_01];
+        _moon = [SKSpriteNode spriteNodeWithTexture:[SKTexture textureWithImageNamed:@"moon-pause"]];
+        [_moon setScale:0.5];
         _moon.position = CGPointMake(size.width - _moon.size.width, size.height - 30.0);
         [self addChild:_moon];
-        SKAction *moonAnim = [SKAction animateWithTextures:SPRITEBUNDLE_ANIM_MOON_MOON timePerFrame:3.0];
-        SKAction *moonPhase = [SKAction repeatActionForever:moonAnim];
-        [_moon runAction:moonPhase];
+        
         
         SKSpriteNode *bg3 =
         [SKSpriteNode spriteNodeWithTexture:SPRITEBUNDLE_TEX_CONTROLS_BUTTONS];
@@ -177,16 +193,21 @@ float const BASE_BONUS_COUNT = 20;
         
         [self addChild:_HUD];
         
-        _hearts = [[NSMutableArray alloc] init];
+        [self setPublicHearts:5];
         
-        for (int i=0; i < _lives; i++) {
-            SKSpriteNode *heart = [SKSpriteNode spriteNodeWithTexture:[SKTexture textureWithImageNamed:@"heart-full"]];
-            heart.position = CGPointMake(19.0, _scoreLabel.position.y - _scoreLabel.frame.size.height - heart.size.height * i);
-            [heart setScale:0.5];
-            [self addChild:heart];
-            [_hearts addObject:heart];
-        }
+        SKSpriteNode *heart = [SKSpriteNode spriteNodeWithImageNamed:@"life-gauge"];
+        [heart setScale:0.5];
+        heart.anchorPoint = CGPointMake(heart.anchorPoint.x, 1);
+        heart.position = CGPointMake(19.0, 498);
+        [_HUD addChild:heart];
         
+        _comboBlips = [[NSMutableArray alloc] init];
+        
+        SKSpriteNode *combo = [SKSpriteNode spriteNodeWithImageNamed:@"combo-gauge"];
+        combo.anchorPoint = CGPointMake(combo.anchorPoint.x, 1);
+        [combo setScale:0.5];
+        combo.position = CGPointMake(19.0, heart.position.y - heart.size.height - 15);
+        [_HUD addChild:combo];
         
         _glimmerParent = [[SKNode alloc] init];
         _particleParent = [[SKNode alloc] init];
@@ -204,6 +225,8 @@ float const BASE_BONUS_COUNT = 20;
         [self addChild:childParent];
         
         [self addChild:_glimmerParent];
+        
+        
         
         [self addChild:_particleParent];
         
@@ -228,6 +251,27 @@ float const BASE_BONUS_COUNT = 20;
     [_backgroundMusicPlayer play];
 }
 
+- (void)setPublicHearts:(NSInteger)h
+{
+    _lives = h;
+    _hearts = [[NSMutableArray alloc] init];
+    
+    for (float i=0; i < _lives; i++) {
+        SKSpriteNode *heart = [SKSpriteNode spriteNodeWithTexture:[SKTexture textureWithImageNamed:@"life-gauge-tick"]];
+        [heart setScale:0.5];
+        heart.anchorPoint = CGPointMake(heart.anchorPoint.x, 1);
+        heart.position = CGPointMake(19.0, _scoreLabel.position.y - 20 - heart.size.height * i - i/2.0f);
+        NSLog(@"HEART: %f", heart.position.y);
+        [_HUD addChild:heart];
+        [_hearts addObject:heart];
+    }
+    
+}
+
+- (void)drawHearts{
+    
+}
+
 - (void)glimmerDeath:(GlimmerSprite*)glimmer {
     
     [glimmer removeFromParent];
@@ -245,7 +289,9 @@ float const BASE_BONUS_COUNT = 20;
             bonusCount = BASE_BONUS_COUNT;
         }
         
-        _multiplier++;
+        if(!glimmer.isBonus){
+            _multiplier++;
+        }
         
         if(highMulti < _multiplier){
             highMulti = _multiplier;
@@ -256,80 +302,72 @@ float const BASE_BONUS_COUNT = 20;
         }
 
         _score += SCORE_PER_GLIMMER * _multiplier;
-        _scoreLabel.text = [NSString stringWithFormat:@"%li", (long)_score];
+        _scoreLabel.text = [_formatter stringFromNumber:[NSNumber numberWithInt:_score]];
         _multiplierLabel.text = [NSString stringWithFormat:@"x%li", (long)_multiplier];
         _multiplierLabel.position = CGPointMake( _scoreLabel.frame.size.width + _scoreLabel.frame.origin.x, _scoreLabel.frame.origin.y + 5.0);
         
         
         [_child catch];
         
-        
-        LEVEL_COUNT ++;
-        if(fmodf(LEVEL_COUNT, LEVEL_THRESHOLD) == 1)
-        {
-            LEVEL++;
+        if(!glimmer.isBonus){
+            LEVEL_COUNT++;
             
-            if(WALK < LEVEL_MAX){
-                WALK *= 1.05;
-                DASH *= 1.05;
-                if(!glimmer.isBonus){
+            if(fmodf(LEVEL_COUNT, LEVEL_THRESHOLD) == 1)
+            {
+                LEVEL++;
+                
+                if(LEVEL < LEVEL_MAX){
+                    SKSpriteNode *comboBlip = [SKSpriteNode spriteNodeWithTexture:[SKTexture textureWithImageNamed:@"combo-gauge-tick"]];
+                    [comboBlip setScale:0.5];
+                    comboBlip.position = CGPointMake(19.0, 410 + (comboBlip.size.height * [_comboBlips count]) + [_comboBlips count]/2.0f);
+                    
+                    [_comboBlips addObject:comboBlip];
+                    [_HUD addChild:comboBlip];
+                    WALK *= MULTI;
+                    DASH *= MULTI;
                     GLIMMER_MOVE_PER_SEC = GLIMMER_MOVE_PRE_BONUS;
-                    GLIMMER_MOVE_PER_SEC *= 1.05;
+                    GLIMMER_MOVE_PER_SEC *= MULTI;
                     GLIMMER_MOVE_PRE_BONUS = GLIMMER_MOVE_PER_SEC;
+                    
                 }
                 
+                
+                musicRate += 0.02;
+                if(musicRate > 2){
+                    musicRate = 2;
+                }
+                
+                [_backgroundMusicPlayer setRate:musicRate];
             }
-            
-            
-            musicRate += 0.02;
-            if(musicRate > 2){
-                musicRate = 2;
-            }
-            
-            [_backgroundMusicPlayer setRate:musicRate];
-            
-            SKLabelNode *levelPop = [[SKLabelNode alloc] initWithFontNamed:@"Dosis-Regular"];
-            //int cur_level = LEVEL_COUNT/LEVEL_THRESHOLD;
-            levelPop.text = [NSString stringWithFormat:@"GREAT COMBO!"];
-            levelPop.fontSize = 50.0;
-            levelPop.position = CGPointMake(self.size.width/2, self.size.height/2);
-            [_HUD addChild:levelPop];
-            
-            SKAction *flyScore = [SKAction moveToY:self.size.height duration:0.5];
-            SKAction *fade = [SKAction fadeAlphaTo:0.0 duration:0.4];
-            SKAction *flyAndFade = [SKAction group:@[flyScore, fade]];
-            
-            [levelPop runAction:flyAndFade completion:^{
-                [levelPop removeFromParent];
-            }];
         }
-        
-        SKEmitterNode *engineEmitter = [NSKeyedUnarchiver unarchiveObjectWithFile:
-                                        [[NSBundle mainBundle] pathForResource:@"glimmerDeath" ofType:@"sks"]];
-        engineEmitter.position = glimmer.position;
-        engineEmitter.name = @"engineEmitter";
-        [_particleParent addChild:engineEmitter];
-        [engineEmitter resetSimulation];
+        SKEmitterNode *_glimmerEmitter = [NSKeyedUnarchiver unarchiveObjectWithFile:
+                           [[NSBundle mainBundle] pathForResource:@"glimmerDeath" ofType:@"sks"]];
+        _glimmerEmitter.position = glimmer.position;
+        [_particleParent addChild:_glimmerEmitter];
+
+        _glimmerEmitter.name = @"engineEmitter";
+        [_glimmerEmitter resetSimulation];
         
         SKAction *waitToRemove = [SKAction waitForDuration:0.5];
         [_particleParent runAction:waitToRemove completion:^{
             [_particleParent removeAllActions];
-            [engineEmitter removeFromParent];
+            [_glimmerEmitter removeFromParent];
         }];
         
         
-         SKLabelNode *scorePop = [[SKLabelNode alloc] initWithFontNamed:@"Dosis-Regular"];
-         int points = SCORE_PER_GLIMMER * _multiplier;
-         scorePop.text = [NSString stringWithFormat:@"+%d", points];
+         //SKLabelNode *scorePop = [[SKLabelNode alloc] initWithFontNamed:@"Dosis-Regular"];
+         //int points = SCORE_PER_GLIMMER * _multiplier;
+         /*scorePop.text = [NSString stringWithFormat:@"+%d", points];
          scorePop.fontSize = 30.0;
          scorePop.position = engineEmitter.position;
          [_HUD addChild:scorePop];
-         SKAction *flyScore = [SKAction moveToY:self.size.height duration:0.5];
-         SKAction *fade = [SKAction fadeAlphaTo:0.0 duration:0.4];
+         SKAction *flyScore = [SKAction moveToY:self.size.height duration:0.25];
+         SKAction *fade = [SKAction fadeAlphaTo:0.0 duration:0.5];
          SKAction *flyAndFade = [SKAction group:@[flyScore, fade]];
          [scorePop runAction:flyAndFade completion:^{
+             [scorePop removeAllActions];
              [scorePop removeFromParent];
-         }];
+         }];*/
     } else {
         [self miss];
     }
@@ -342,11 +380,14 @@ float const BASE_BONUS_COUNT = 20;
                                
                                GlimmerSprite *glimmer = (GlimmerSprite *)node;
                                
-                               CGRect smallerFrame = CGRectMake(_child.frame.origin.x, _child.frame.origin.y + 10, _child.frame.size.width - 10.0, 50.0);
-                               
-                               if (CGRectIntersectsRect(smallerFrame, glimmer.frame)) {
-
-                                   [self glimmerDeath:glimmer];
+                               if(glimmer.position.y < 180){
+                                   CGRect smallerFrame = CGRectMake(_child.frame.origin.x, _child.frame.origin.y + 10, _child.frame.size.width - 10.0, 50.0);
+                                   
+                                   if (CGRectIntersectsRect(smallerFrame, glimmer.frame)) {
+                                       
+                                       [self glimmerDeath:glimmer];
+    
+                                   }
                                    
                                }
                            }];
@@ -357,23 +398,20 @@ float const BASE_BONUS_COUNT = 20;
             
             GlimmerSprite *glimmer;
             NSInteger idx = arc4random() % 2 + 1;
-
+            glimmer = [GlimmerSprite spriteNodeWithTexture:SPRITEBUNDLE_TEX_GLIMMER_GLIMMER_WHITE
+                                                      size:CGSizeMake(20.0, 20.0)];
             if(idx == 1){
-                glimmer = [GlimmerSprite spriteNodeWithTexture:SPRITEBUNDLE_TEX_GLIMMER_THING_02
-                                                         size:CGSizeMake(20.0, 20.0)];
-                
-            } else {
-                glimmer = [GlimmerSprite spriteNodeWithTexture:SPRITEBUNDLE_TEX_GLIMMER_THING_01
-                                                         size:CGSizeMake(20.0, 20.0)];
+                SKAction *rotation = [SKAction rotateByAngle: M_PI/2.0 duration:0];
+                //and just run the action
+                [glimmer runAction: rotation];
             }
+            
             glimmer.type = 1;
             
-            float maxGap = LEVEL_COUNT/LEVEL_THRESHOLD;
-            if(maxGap > 5){
-                maxGap = 5;
+            GAP = (((arc4random() % 100)/100.0f)*.5) + 0.5 - (LEVEL/2)*0.05;
+            if(GAP < 0.25){
+                GAP = 0.25;
             }
-            GAP = (((arc4random() % 100)/100.0f)*.5) + 0.5 - (maxGap)*0.02;
-            
             
             if(isBonus && bonusCount > 0){
                 glimmer.isBonus = YES;
@@ -390,7 +428,7 @@ float const BASE_BONUS_COUNT = 20;
                 
                 glimmer.position = CGPointMake(_child.position.x, self.view.frame.size.height);
             } else {
-            
+                GLIMMER_MOVE_PER_SEC = GLIMMER_MOVE_PRE_BONUS;
                 if(nextBlueCounter == nextBlue){
                     
                     nextBlue = (arc4random() % 25) + 25;
@@ -439,6 +477,35 @@ float const BASE_BONUS_COUNT = 20;
     
 }
 
+-(void)togglePause
+{
+    if(self.paused){
+        [self unpause];
+
+    } else {
+        [self pause];
+    }
+}
+
+-(void)unpause
+{
+    self.paused = NO;
+    timer = [NSTimer timerWithTimeInterval:GAP target:self selector:@selector(makeNewGlimmer) userInfo:nil repeats:NO];
+    [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
+    [_backgroundMusicPlayer play];
+    [_moon setTexture:[SKTexture textureWithImageNamed:@"moon-pause"]];
+}
+
+-(void)pause{
+    self.paused = YES;
+    [timer invalidate];
+    [_backgroundMusicPlayer pause];
+    _lastUpdateTime = 0;
+    _dt = 0;
+    [_moon setTexture:[SKTexture textureWithImageNamed:@"moon-play"]];
+}
+
+
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
    
     /* Called when a touch begins */
@@ -462,92 +529,99 @@ float const BASE_BONUS_COUNT = 20;
     }
     
     for (UITouch *touch in touches) {
-
         CGPoint location = [touch locationInNode:self];
-        
-        NSInteger nearestX = (location.x / (self.size.width/4));
-        
-        int x = (nearestX * (self.view.frame.size.width / 4)) + _child.size.width / 2;
-        
-        NSInteger dif = ABS(nearestX - lastX);
-        
-        
-        if(x > _child.position.x){
-            
-            _child.direction = @"right";
-
-            if(dif  < 2){
-                CHILD_MOVE_PER_SECOND = WALK;
-                [_child walk];
-            } else {
-                CHILD_MOVE_PER_SECOND = DASH;
-                [_child dash];
-            }
-            
+        // If the user taps on BACK Button Rectangle
+        if (CGRectContainsPoint(_moon.frame, location))
+        {
+            [self togglePause];
         } else {
+            
+            NSInteger nearestX = (location.x / (self.size.width/4));
+            
+            int x = (nearestX * (self.view.frame.size.width / 4)) + _child.size.width / 2;
+            
+            NSInteger dif = ABS(nearestX - lastX);
+            
+            
+            if(x > _child.position.x){
+                
+                _child.direction = @"right";
 
-            _child.direction = @"left";
-
-            if(dif < 2){
-                CHILD_MOVE_PER_SECOND = WALK;
-                [_child walk];
+                if(dif  < 2){
+                    CHILD_MOVE_PER_SECOND = WALK;
+                    [_child walk];
+                } else {
+                    CHILD_MOVE_PER_SECOND = DASH;
+                    [_child dash];
+                }
+                
             } else {
-                CHILD_MOVE_PER_SECOND = DASH;
-                [_child dash];
-            }
-        }
-        
-        lastX = nearestX;
 
-        lastPoint = CGPointMake(x, _child.position.y);
-        btn.position = CGPointMake(lastPoint.x - 10.0, 48.0);
-        
-        SKAction *btnFade = [SKAction fadeAlphaTo:1.0 duration:0.1];
-        SKAction *btnFadeOut = [SKAction fadeAlphaTo:0.0 duration:0.3];
-        SKAction *fadeAction = [SKAction sequence:@[btnFade, btnFadeOut]];
-        
-        [btn runAction:fadeAction];
-        [self moveChildToward:lastPoint];
+                _child.direction = @"left";
+
+                if(dif < 2){
+                    CHILD_MOVE_PER_SECOND = WALK;
+                    [_child walk];
+                } else {
+                    CHILD_MOVE_PER_SECOND = DASH;
+                    [_child dash];
+                }
+            }
+            
+            lastX = nearestX;
+
+            lastPoint = CGPointMake(x, _child.position.y);
+            btn.position = CGPointMake(lastPoint.x - 10.0, 48.0);
+            
+            SKAction *btnFade = [SKAction fadeAlphaTo:1.0 duration:0.1];
+            SKAction *btnFadeOut = [SKAction fadeAlphaTo:0.0 duration:0.3];
+            SKAction *fadeAction = [SKAction sequence:@[btnFade, btnFadeOut]];
+            
+            [btn runAction:fadeAction];
+            [self moveChildToward:lastPoint];
+        }
     }
 }
 
 -(void)update:(CFTimeInterval)currentTime {
     
-    /* Called before each frame is rendered */
-    //NSLog(@"UPDATE");
-    if (_lastUpdateTime) {
-        _dt = currentTime - _lastUpdateTime;
-    } else {
-        _dt = 0;
-    }
-    _lastUpdateTime = currentTime;
-    
-    CGPoint offset = CGPointMake(lastPoint.x - _child.position.x, lastPoint.y - _child.position.y);
-    CGFloat length = sqrtf(offset.x * offset.x + offset.y * offset.y);
-    
-    if(length > 5 && _velocity.x != 0){
-        [self moveSprite:_child velocity:_velocity];
-        [self boundsCheckPlayer];
-    } else {
-        
-        if(_velocity.x != 0){
-            [_child setPosition:lastPoint];
-            _velocity = CGPointMake(0, 0);
-            
-            [_child resetCharacter];
-        }
-    }
-    
-    
-    for (GlimmerSprite *glimmer in _glimmers) {
-        if(glimmer.isBonus){
-            [self moveSprite:glimmer toward:CGPointMake(_child.position.x, _child.position.y - 20)];
-            [self moveSprite:glimmer velocity:glimmer.velocity];
+    if(!self.paused){
+        /* Called before each frame is rendered */
+        //NSLog(@"UPDATE");
+        if (_lastUpdateTime) {
+            _dt = currentTime - _lastUpdateTime;
         } else {
-            [self moveSprite:glimmer velocity:CGPointMake(0, -GLIMMER_MOVE_PER_SEC)];
+            _dt = 0;
+        }
+        _lastUpdateTime = currentTime;
+        
+        CGPoint offset = CGPointMake(lastPoint.x - _child.position.x, lastPoint.y - _child.position.y);
+        CGFloat length = sqrtf(offset.x * offset.x + offset.y * offset.y);
+        
+        if(length > 5 && _velocity.x != 0){
+            [self moveSprite:_child velocity:_velocity];
+            [self boundsCheckPlayer];
+        } else {
+            
+            if(_velocity.x != 0){
+                [_child setPosition:lastPoint];
+                _velocity = CGPointMake(0, 0);
+                
+                [_child resetCharacter];
+            }
         }
         
         
+        for (GlimmerSprite *glimmer in _glimmers) {
+            if(glimmer.isBonus){
+                [self moveSprite:glimmer toward:CGPointMake(_child.position.x, _child.position.y - 20)];
+                [self moveSprite:glimmer velocity:glimmer.velocity];
+            } else {
+                [self moveSprite:glimmer velocity:CGPointMake(0, -GLIMMER_MOVE_PER_SEC)];
+            }
+            
+            
+        }
     }
     
 }
@@ -555,21 +629,24 @@ float const BASE_BONUS_COUNT = 20;
 - (void)didEvaluateActions
 {
     
-    [self checkCollisions];
-    NSMutableIndexSet *indexes = [[NSMutableIndexSet alloc] init];
-    for (GlimmerSprite *glimmer in _glimmers) {
-        if(glimmer.position.y < 10.0){
-            NSUInteger fooIndex = [_glimmers indexOfObject: glimmer];
-            [indexes addIndex:(fooIndex)];
-            [glimmer removeFromParent];
-            
-            if(glimmer.type != 3){
-                [self miss];
+    if(!self.paused){
+        [self checkCollisions];
+        
+        NSMutableIndexSet *indexes = [[NSMutableIndexSet alloc] init];
+        for (GlimmerSprite *glimmer in _glimmers) {
+            if(glimmer.position.y < 10.0){
+                NSUInteger fooIndex = [_glimmers indexOfObject: glimmer];
+                [indexes addIndex:(fooIndex)];
+                [glimmer removeFromParent];
+                
+                if(glimmer.type != 3){
+                    [self miss];
+                }
+                
             }
-            
         }
+        [_glimmers removeObjectsAtIndexes:indexes];
     }
-    [_glimmers removeObjectsAtIndexes:indexes];
 
 }
 
@@ -593,34 +670,29 @@ float const BASE_BONUS_COUNT = 20;
     _multiplier = 1;
     _multiplierLabel.text = [NSString stringWithFormat:@"x%li", (long)_multiplier];
     
+    for (SKSpriteNode *blip in _comboBlips) {
+        [blip removeFromParent];
+    }
+    
+    [_comboBlips removeAllObjects];
+    
     DASH = BASE_DASH;
     WALK = BASE_WALK;
     CHILD_MOVE_PER_SECOND = BASE_CHILD_MOVE;
     GLIMMER_MOVE_PER_SEC = BASE_GLIMMER;
+    GLIMMER_MOVE_PRE_BONUS = BASE_GLIMMER;
     LEVEL_COUNT = 1.0;
     
-    LEVEL = 1;
+    LEVEL = 0;
     
     _lives--;
     
     musicRate = 1.0;
     [_backgroundMusicPlayer setRate:musicRate];
     
-    /*SKLabelNode *levelPop = [[SKLabelNode alloc] initWithFontNamed:@"Dosis-Regular"];
-    levelPop.text = [NSString stringWithFormat:@"COMBO ENDED!"];
-    levelPop.fontSize = 50.0;
-    levelPop.position = CGPointMake(self.size.width/2, self.size.height/2);
-    [_HUD addChild:levelPop];
-    
-    SKAction *flyScore = [SKAction moveToY:self.size.height duration:1.0];
-    SKAction *fade = [SKAction fadeAlphaTo:0.0 duration:0.8];
-    SKAction *flyAndFade = [SKAction group:@[flyScore, fade]];
-    [levelPop runAction:flyAndFade completion:^{
-        [levelPop removeFromParent];
-    }];*/
     
     if(_lives >= 0){
-        SKSpriteNode *heart = [_hearts objectAtIndex:_lives];
+        SKSpriteNode *heart = [_hearts objectAtIndex:0];
         
         SKEmitterNode *engineEmitter = [NSKeyedUnarchiver unarchiveObjectWithFile:
                                         [[NSBundle mainBundle] pathForResource:@"HeartPop" ofType:@"sks"]];
@@ -630,8 +702,9 @@ float const BASE_BONUS_COUNT = 20;
         [engineEmitter resetSimulation];
         
         [heart removeFromParent];
-        [_hearts removeObjectAtIndex:_lives];
+        [_hearts removeObjectAtIndex:0];
     }
+    
     if(_lives < 1){
         
         _gameOver = YES;
@@ -675,20 +748,23 @@ float const BASE_BONUS_COUNT = 20;
             }
         }
         
-        //[_glimmers removeAllObjects];
+        
         SKAction *waitForGameOver = [SKAction waitForDuration:0.5];
         [self runAction:waitForGameOver completion:^{
             
-            [_backgroundMusicPlayer stop];
+            //[_backgroundMusicPlayer stop];
             // 1
-            SKScene * gameOverScene =
-            [[GameOverScene alloc] initWithSize:self.size];
-            
+            GAP = 0.75;
+            [self pause];
+            [_glimmers removeAllObjects];
+
+            ContinueScene *continueScene = [[ContinueScene alloc] initWithSize:self.size];
+            continueScene.gameScene = self;
             // 2
             SKTransition *reveal =
             [SKTransition fadeWithDuration:0.5];
             
-            [self.view presentScene:gameOverScene transition:reveal];
+            [self.view presentScene:continueScene transition:reveal];
         }];
     }
 }

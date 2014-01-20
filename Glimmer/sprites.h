@@ -67,6 +67,7 @@
 #define SPRITEBUNDLE_SPR_CONTROLS_BUTTONS                                     @"controls/buttons"
 #define SPRITEBUNDLE_SPR_CONTROLS_BUTTONS_PRESSED                             @"controls/buttons-pressed"
 #define SPRITEBUNDLE_SPR_CONTROLS_BUTTONS_SWIPED                              @"controls/buttons-swiped"
+#define SPRITEBUNDLE_SPR_GLIMMER_GLIMMER_WHITE                                @"glimmer/glimmer-white"
 #define SPRITEBUNDLE_SPR_GLIMMER_THING_01                                     @"glimmer/thing-01"
 #define SPRITEBUNDLE_SPR_GLIMMER_THING_02                                     @"glimmer/thing-02"
 #define SPRITEBUNDLE_SPR_JAR_JAR_WON_01                                       @"jar/jar-won-01"
@@ -141,6 +142,7 @@
 #define SPRITEBUNDLE_TEX_CONTROLS_BUTTONS                                     [SKTexture textureWithImageNamed:@"controls/buttons"]
 #define SPRITEBUNDLE_TEX_CONTROLS_BUTTONS_PRESSED                             [SKTexture textureWithImageNamed:@"controls/buttons-pressed"]
 #define SPRITEBUNDLE_TEX_CONTROLS_BUTTONS_SWIPED                              [SKTexture textureWithImageNamed:@"controls/buttons-swiped"]
+#define SPRITEBUNDLE_TEX_GLIMMER_GLIMMER_WHITE                                [SKTexture textureWithImageNamed:@"glimmer/glimmer-white"]
 #define SPRITEBUNDLE_TEX_GLIMMER_THING_01                                     [SKTexture textureWithImageNamed:@"glimmer/thing-01"]
 #define SPRITEBUNDLE_TEX_GLIMMER_THING_02                                     [SKTexture textureWithImageNamed:@"glimmer/thing-02"]
 #define SPRITEBUNDLE_TEX_JAR_JAR_WON_01                                       [SKTexture textureWithImageNamed:@"jar/jar-won-01"]

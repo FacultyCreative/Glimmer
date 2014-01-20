@@ -11,5 +11,5 @@
 @interface StoreViewController : UIViewController
 
 - (IBAction)closeStore:(id)sender;
-
+- (IBAction)openProduct:(id)sender;
 @end

@@ -9,60 +9,9 @@
         <array>
             <struct type="AutoSDSettings">
                 <key>scale</key>
-                <double>0.25</double>
+                <double>1</double>
                 <key>extension</key>
                 <string></string>
-                <key>spriteFilter</key>
-                <string></string>
-                <key>acceptFractionalValues</key>
-                <false/>
-                <key>maxTextureSize</key>
-                <QSize>
-                    <key>width</key>
-                    <int>-1</int>
-                    <key>height</key>
-                    <int>-1</int>
-                </QSize>
-            </struct>
-            <struct type="AutoSDSettings">
-                <key>scale</key>
-                <double>0.5</double>
-                <key>extension</key>
-                <string>@2x</string>
-                <key>spriteFilter</key>
-                <string></string>
-                <key>acceptFractionalValues</key>
-                <false/>
-                <key>maxTextureSize</key>
-                <QSize>
-                    <key>width</key>
-                    <int>-1</int>
-                    <key>height</key>
-                    <int>-1</int>
-                </QSize>
-            </struct>
-            <struct type="AutoSDSettings">
-                <key>scale</key>
-                <double>0.25</double>
-                <key>extension</key>
-                <string>~iphone</string>
-                <key>spriteFilter</key>
-                <string></string>
-                <key>acceptFractionalValues</key>
-                <false/>
-                <key>maxTextureSize</key>
-                <QSize>
-                    <key>width</key>
-                    <int>-1</int>
-                    <key>height</key>
-                    <int>-1</int>
-                </QSize>
-            </struct>
-            <struct type="AutoSDSettings">
-                <key>scale</key>
-                <double>0.5</double>
-                <key>extension</key>
-                <string>@2x~iphone</string>
                 <key>spriteFilter</key>
                 <string></string>
                 <key>acceptFractionalValues</key>
@@ -85,9 +34,9 @@
         <key>dpi</key>
         <uint>72</uint>
         <key>dataFormat</key>
-        <string>spritekit</string>
+        <string>unity</string>
         <key>textureFileName</key>
-        <filename></filename>
+        <filename>../../../Unity/GlimmerUnity/Glimmer/Assets/sprite-{n}.png</filename>
         <key>flipPVR</key>
         <true/>
         <key>ditherType</key>
@@ -119,9 +68,9 @@
         <key>maxTextureSize</key>
         <QSize>
             <key>width</key>
-            <int>4096</int>
+            <int>2048</int>
             <key>height</key>
-            <int>4096</int>
+            <int>2048</int>
         </QSize>
         <key>fixedTextureSize</key>
         <QSize>
@@ -135,11 +84,11 @@
         <key>algorithmSettings</key>
         <struct type="AlgorithmSettings">
             <key>algorithm</key>
-            <enum type="AlgorithmSettings::AlgorithmId">Basic</enum>
+            <enum type="AlgorithmSettings::AlgorithmId">MaxRects</enum>
             <key>freeSizeMode</key>
             <enum type="AlgorithmSettings::AlgorithmFreeSizeMode">Best</enum>
             <key>sizeConstraints</key>
-            <enum type="AlgorithmSettings::SizeConstraints">AnySize</enum>
+            <enum type="AlgorithmSettings::SizeConstraints">POT</enum>
             <key>forceSquared</key>
             <false/>
             <key>forceWordAligned</key>
@@ -178,12 +127,12 @@
             <key>bundle</key>
             <struct type="DataFile">
                 <key>name</key>
-                <filename>SpriteBundle.atlasc</filename>
+                <filename>SpriteBundle-{n}.atlasc</filename>
             </struct>
             <key>data</key>
             <struct type="DataFile">
                 <key>name</key>
-                <filename></filename>
+                <filename>../../../Unity/GlimmerUnity/Glimmer/Assets/SpriteSheet{n}.txt</filename>
             </struct>
             <key>header</key>
             <struct type="DataFile">
@@ -192,7 +141,7 @@
             </struct>
         </map>
         <key>multiPack</key>
-        <false/>
+        <true/>
         <key>forceIdenticalLayout</key>
         <false/>
         <key>outputFormat</key>
@@ -205,7 +154,7 @@
         <key>autoAliasEnabled</key>
         <false/>
         <key>trimSpriteNames</key>
-        <false/>
+        <true/>
         <key>cleanTransparentPixels</key>
         <true/>
         <key>globalSpriteSettings</key>
@@ -221,7 +170,7 @@
             <key>trimThreshold</key>
             <uint>1</uint>
             <key>trimMode</key>
-            <enum type="SpriteSettings::TrimMode">None</enum>
+            <enum type="SpriteSettings::TrimMode">Trim</enum>
             <key>heuristicMask</key>
             <false/>
         </struct>

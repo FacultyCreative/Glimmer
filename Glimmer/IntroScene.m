@@ -10,11 +10,14 @@
 #import "sprites.h"
 #import "MyScene.h"
 #import "SKButton.h"
+#import "SKRoundedRectangle.h"
+#import "SKRoundedButton.h"
+
 
 @implementation IntroScene
 {
-    SKLabelNode *backButton;
-    SKLabelNode *aboutButton;
+    SKRoundedButton *backButton;
+    SKRoundedButton *aboutButton;
 }
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
@@ -33,38 +36,51 @@
         sky.position = CGPointMake(size.width/2, size.height/2);
         [self addChild:sky];
         
+        SKNode *nudge = [[SKNode alloc] init];
+        nudge.position = CGPointMake(self.size.width/2, 150.0);
+        [self addChild: nudge];
         
         SKLabelNode *nudgeLabel = [SKLabelNode labelNodeWithFontNamed:@"Dosis-Regular"];
         nudgeLabel.text = @"Nudge";
         nudgeLabel.fontColor = [UIColor whiteColor];
         nudgeLabel.fontSize = 20;
         nudgeLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeCenter;
-        nudgeLabel.position = CGPointMake(self.size.width/2, 150.0);
         
-        [self addChild:nudgeLabel];
+        [nudge addChild:nudgeLabel];
+        
+        SKSpriteNode *nudgeArrow = [SKSpriteNode spriteNodeWithImageNamed:@"arrow"];
+        [nudgeArrow setScale:0.25];
+        [nudge addChild: nudgeArrow];
+        nudgeArrow.position = CGPointMake(0, -14);
         
         SKAction *up = [SKAction moveToY:160 duration:1.25];
         SKAction *down = [SKAction moveToY:150.0 duration:.25];
         SKAction *bounce = [SKAction sequence:@[up, down]];
         SKAction *repeatBounce = [SKAction repeatActionForever:bounce];
-        [nudgeLabel runAction:repeatBounce];
-
-        backButton = [SKLabelNode labelNodeWithFontNamed:@"Dosis-Regular"];
-        backButton.text = @"STORE";
-        backButton.fontColor = [UIColor whiteColor];
-        backButton.fontSize = 20;
-        backButton.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeCenter;
-        backButton.position = CGPointMake(40, self.size.height - 40);
+        [nudge runAction:repeatBounce];
         
+        
+        backButton = [SKRoundedButton rectangleWithRect:CGRectMake(0, 0, 80, 40)
+                                            cornerRadius:3.0
+                                             borderColor:[UIColor whiteColor]
+                                               fillColor:[UIColor clearColor]
+                                             borderWidth:1.0
+                                                fontName:@"Dosis-Regular"
+                                                    text:@"STORE"];
+        
+        backButton.position = CGPointMake( 15, size.height - 50);
         [self addChild:backButton];
         
-        aboutButton = [SKLabelNode labelNodeWithFontNamed:@"Dosis-Regular"];
-        aboutButton.text = @"?";
-        aboutButton.fontColor = [UIColor whiteColor];
-        aboutButton.fontSize = 20;
-        aboutButton.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeCenter;
-        aboutButton.position = CGPointMake(self.size.width - 40, self.size.height - 40);
         
+        CGRect aboutRect = CGRectMake(0, 0, 40, 40);
+        aboutButton = [SKRoundedButton rectangleWithRect:aboutRect
+                                            cornerRadius:3.0
+                                             borderColor:[UIColor whiteColor]
+                                               fillColor:[UIColor clearColor]
+                                             borderWidth:1.0
+                                                fontName:@"Dosis-Regular"
+                                                    text:@"?"];
+        aboutButton.position = CGPointMake(size.width - 50, size.height - 50);
         [self addChild:aboutButton];
     }
     return self;

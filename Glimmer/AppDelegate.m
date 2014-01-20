@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import <TestFlightSDK/TestFlight.h>
+#import "AidArcadeIAPHelper.h"
+#import "AidListener.h"
 
 @implementation AppDelegate
 {
@@ -19,6 +21,10 @@
     // start of your application:didFinishLaunchingWithOptions // ...
     self.window.backgroundColor = [UIColor blackColor];
     [TestFlight takeOff:@"7876795f-7c4b-425d-854d-04fc4e9bc232"];
+    [AidArcadeIAPHelper sharedInstance];
+    [AidListener sharedInstance];
+    
+    [AidListener sharedInstance];
     
     //[NewRelicAgent startWithApplicationToken:@"AA2fd08763d5d73a7163579748e2bd74a5b380ff5d"];
     // The rest of your application:didFinishLaunchingWithOptions method

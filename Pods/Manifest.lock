@@ -1,10 +1,22 @@
 PODS:
+  - Facebook-iOS-SDK (3.11.0)
+  - GSKeychain (1.0.0)
+  - MBProgressHUD (0.8)
+  - Parse (1.2.17):
+    - Facebook-iOS-SDK (~> 3.9)
   - TestFlightSDK (2.1.1-beta)
 
 DEPENDENCIES:
+  - GSKeychain (~> 1.0.0)
+  - MBProgressHUD (~> 0.8)
+  - Parse (~> 1.2.17)
   - TestFlightSDK (~> 2.1.1-beta)
 
 SPEC CHECKSUMS:
+  Facebook-iOS-SDK: 2eb12f9ed04f3d3956f0a4fb0e4e60c824dcd101
+  GSKeychain: 59439fa4bb05d21f2cbd4b67e7133c2572cc8dc4
+  MBProgressHUD: 2bbc6f470111daf7f3eaa4eb12b8cbf01c4c0622
+  Parse: 0647e995f0afadad3f0f015304912a859c2958c8
   TestFlightSDK: dea28c16f0bf65c49c4ed8939b2ae0b0ed9bf8b0
 
-COCOAPODS: 0.26.2
+COCOAPODS: 0.29.0

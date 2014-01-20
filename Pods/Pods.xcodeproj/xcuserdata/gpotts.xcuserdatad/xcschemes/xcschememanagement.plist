@@ -4,6 +4,26 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Pods-Facebook-iOS-SDK.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-GSKeychain.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-MBProgressHUD.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-Parse.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-TestFlightSDK.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -17,12 +37,32 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>4A15D6E50BF44D808F747EAE</key>
+		<key>1E7F025FA20E474D84DE8753</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8B371682E63F4C4F96E5A0FB</key>
+		<key>3989C0430AC74B1AA28C3FA6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>43037F6162EB49F4A18C7C2B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>863859A140E249A0AA0294AA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9B740B55D81F4C8895ED8470</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9BF25AD27F244C6DA176F113</key>
 		<dict>
 			<key>primary</key>
 			<true/>
